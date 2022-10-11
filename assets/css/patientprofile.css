@@ -288,7 +288,6 @@ body {
 .details .recentBill {
   position: relative;
   display: grid;
-  min-height: 500px;
   background: var(--white);
   padding: 20px;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -299,6 +298,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  Padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 .cardHeader h2 {
