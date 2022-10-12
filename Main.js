@@ -3,9 +3,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const encoder = bodyParser.urlencoded();
 // change to an available localhost port
-const portnum = 1120;
+// Can use Resource Monitor (Windows) to find available localports
+const localHostPortNum = 1120;
 const schemaName = "hospitaldb";
-const dbPassword = "example";
+const dbPassword = "!3df0ry3rh34d";
 
 const app = express();
 app.use("/assets",express.static("assets"));
@@ -35,10 +36,10 @@ app.post("/",encoder, function(req,res){
     var username = req.body.username;
     var password = req.body.password;
 
-    connection.query(`select * from ${schemaName}.patient_login where username = ${username} and password = ${password}`,[username,password],function(error,results,fields){
-        if (results.length > 0) {
+    connection.query(`select * from ${schemaName}.login where username = ${username} and password = ${password}`, function(error,results,fields){
+        if (results.length > 0 && !error) {
             res.redirect("/Profile.html");
-        } else {
+        } else{
             res.redirect("/PatientLogin.html");
         }
         res.end();
@@ -49,4 +50,4 @@ app.get("/Profile.html",function(req,res){
     res.sendFile(__dirname + "/Profile.html")
 })
 // set app port 
-app.listen(portnum);
+app.listen(localHostPortNum);
