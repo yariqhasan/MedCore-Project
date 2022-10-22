@@ -2,6 +2,14 @@
   box-sizing: border-box;
   outline: none;
 }
+
+button {
+  cursor: pointer;
+}
+input{
+  cursor: pointer;
+}
+
 body {
   margin: 0;
   font-family: Sans-serif;
@@ -28,7 +36,13 @@ body {
   z-index: 10;
 }
 #padding-top {
-  padding-top: 50px;
+  padding-top: 60px;
+}
+
+#checkbox-select {
+  font-size: 16px;
+
+  
 }
 #left-hand-content{
   padding-top: 50px;
@@ -309,6 +323,7 @@ body {
 }
 .buttons {
   display: flex;
+
 }
 .middle-buttons {
   display: flex;
