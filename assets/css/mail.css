@@ -21,6 +21,18 @@ body {
   background-color: #0671eb;
   display: flex;
 }
+#mail-fixed {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  z-index: 10;
+}
+#padding-top {
+  padding-top: 50px;
+}
+#left-hand-content{
+  padding-top: 50px;
+}
 .wrapper {
   padding: 0 25px;
   height: 100vh;
@@ -75,6 +87,7 @@ body {
   color: white;
   font-size: 16px;
   padding-left: 20px;
+  cursor: pointer;
   position: relative;
 }
 .folders {
@@ -91,11 +104,13 @@ body {
 .icon-name1 {
   margin-left: 10px;
   color: #8b47a9;
+  cursor: pointer;
 }
 
 .icon-name {
   margin-left: 10px;
   color: grey;
+  cursor: pointer;
 }
 .names {
   margin-left: 10px;
