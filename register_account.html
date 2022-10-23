@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Admin Login</title>
+  <title>Register Account</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -53,10 +53,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Patient Login-In</h2>
+          <h2>Register Account</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li>Patient Login</li>
+            <li>Register Account</li>
           </ol>
         </div>
 
@@ -67,25 +67,32 @@
       <div class="global-container">
         <div class="card login-form">
         <div class="card-body">
-          <h3 class="card-title text-center">Patient Login-In</h3>
+          <h3 class="card-title text-center">Register Account</h3>
           <div class="card-text">
             <!--
             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
             <form action="/" method="POST">
               <!-- to error: add class "has-danger" -->
               <div class="form-group">
-                  <label for="exampleInputEmail1">Username</label>
-                  <input type="username" name="username"class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="exampleInputEmail1">Email (optional)</label>
+                <input type="email" name="email"class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputUsername1">Username</label>
+                  <input type="username" name="username"class="form-control form-control-sm" id="exampleInputUser1" aria-describedby="userHelp">
               </div>
               <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <a href="#" style="float:right;font-size:12px;">Forgot password?</a>
                   <input type="password" name="password" class="form-control form-control-sm" id="exampleInputPassword1">
               </div>
-              <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+              <div class="form-group">
+                <label for="exampleInputConfirmPassword1">Confirm Password</label>
+                <input type="password" name="confirmPassword" class="form-control form-control-sm" id="exampleInputConfirmPassword1">
+            </div>
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
               
               <div class="sign-up">
-                Don't have an account? <a href="#">Create One</a>
+                Don't have an account? <a href="register_account.html">Create One</a>
               </div>
             </form>
           </div>
