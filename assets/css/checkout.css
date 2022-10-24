@@ -531,7 +531,7 @@ td
   padding: 10px 5px;
 }
 
-td input
+td input[type="number"]
 {
   width: 40px;
   height: 30px;
