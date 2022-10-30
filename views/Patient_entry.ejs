@@ -19,13 +19,13 @@
 
     <!-- Vendor CSS Files -->
     <link
-      href="assets/vendor/fontawesome-free/css/all.min.css"
+      href="vendor/fontawesome-free/css/all.min.css"
       rel="stylesheet"
     />
 
     <!-- Template Main CSS File -->
     <link
-      href="assets/css/patientprofile.css"
+      href="css/patientprofile.css"
       rel="stylesheet"
     />
     <style>
@@ -46,12 +46,12 @@
         <div class="navigation">
           <ul>
             <li>
-              <a href="index.html">
+              <a href="index">
                 <span class="title">MedCore</span>
               </a>
             </li>
             <li>
-              <a href="PatientList.html">
+              <a href="PatientList">
                 <span class="icon"
                   ><ion-icon name="list-outline"></ion-icon
                 ></span>
@@ -59,7 +59,7 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="Patient_entry">
                 <span class="icon"
                   ><ion-icon name="person-add-outline"></ion-icon
                 ></span>
@@ -67,7 +67,7 @@
               </a>
             </li>
             <li>
-              <a href="Mail.html">
+              <a href="#">
                 <span class="icon"
                   ><ion-icon name="mail-outline"></ion-icon
                 ></span>
@@ -75,7 +75,7 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="Chat_bots">
                 <span class="icon"
                   ><ion-icon name="megaphone-outline"></ion-icon
                 ></span>
@@ -111,42 +111,35 @@
                 <h2>New patient</h2>
               </div>
               <div style="width: 500px">
-                <form action="#" method="post">
+                <form action="/new_entry" method="POST">
                   <table id="patientForm">
                     <tbody>
                       <tr>
-                        <td>First name</td>
+                        <td>PID</td>
                         <td>
-                          <input type="text" name="first_name" />
+                          <input type="text" name="PID" id="PID" required />
                         </td>
                       </tr>
                       <tr>
-                        <td>Last name</td>
+                        <td>First Name</td>
                         <td>
-                          <input type="text" name="last_name" />
+                          <input type="text" name="first_name" id="first_name" required/>
                         </td>
                       </tr>
 
                       <tr>
-                        <td>Contact number</td>
+                        <td>Last Name</td>
                         <td>
-                          <input
-                            type="tel"
-                            name="telphone"
-                            placeholder="888 888 8888"
-                            pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
-                            maxlength="12"
-                            title="Ten digits code"
-                            required
-                          />
+                          <input type="text" name="last_name" id="last_name" required/>
                         </td>
                       </tr>
                       <tr>
-                        <td>Email</td>
+                        <td>Contact</td>
                         <td>
                           <input
-                            type="email"
-                            name="email_address"
+                            type="text"
+                            name="contact_num"
+                            id="contact_num"
                             required
                           />
                         </td>
@@ -155,32 +148,38 @@
                       <tr>
                         <td>Address</td>
                         <td>
-                          <input type="text" name="address" />
+                          <input type="text" name="address" id="address" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Email Address</td>
+                        <td>
+                          <input type="text" name="email_addr" id="email_addr" />
                         </td>
                       </tr>
                       <tr>
                         <td>Gender</td>
                         <td>
                           <input
-                            id="genderMale"
+                            id="sex"
                             type="radio"
-                            name="gender"
-                            value="Male"
+                            name="sex"
+                            value="M"
                           /><label for="genderMale">Male</label>
 
                           <input
                             type="radio"
-                            name="gender"
-                            id="genderFemale"
-                            value="Female"
+                            name="sex"
+                            id="sex"
+                            value="F"
                           /><label for="genderFemale"
                             >Female</label
                           >
                           <input
                             type="radio"
-                            name="gender"
-                            id="genderUnknown"
-                            value="Unknown"
+                            name="sex"
+                            id="sex"
+                            value="UN"
                           /><label for="genderUnknown"
                             >Unknown</label
                           >
@@ -189,7 +188,7 @@
 
                       <tr>
                         <td colspan="2">
-                          <input type="submit" value="Save" />
+                          <input type="submit" value="submit" />
                           <input type="reset" value="Reset" />
                         </td>
                       </tr>
@@ -239,13 +238,13 @@
     ></a>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

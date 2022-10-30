@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Checkout Cart</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet">
+
+
+    <!-- Template Main CSS File -->
+    <link href="css/checkout.css" rel="stylesheet">
+    
+    <!-- Vendor CSS Files -->
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link
+      href="css/patientprofile.css"
+      rel="stylesheet"
+    />
+    
+      <style>     
+          .payment-container {
+  position: relative;
+  width: 60%;
+}
+  .row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: 60%; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+.col-25 {
+  -ms-flex: 30%; /* IE10 */
+  flex: 25%;
+}
+          
+.col-15 {
+  -ms-flex: 30; /* IE10 */
+  flex: 30%;
+}
+              
+          
+          
+
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; /* IE10 */
+  flex: 75%;
+}
+          
+          .col-52 {
+  -ms-flex: 52%; /* IE10 */
+  flex: 52%;
+}
+
+.col-25, col-15,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container-cc {
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+input[type=text] {
+  width: 550;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+          
+.select {
+  width: 50%;
+  margin-bottom: 20px;
+  padding: 22px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <!--progress bar-->
+        <div class="form-progress">
+            <progress class="form-progress-bar" min="0" max="100" value="0" step="33"
+                aria-labelledby="form-progress-completion"></progress>
+
+            <div class="form-progress-indicator one"></div>
+            <div class="form-progress-indicator two"></div>
+            <div class="form-progress-indicator three active"></div>
+            <div class="form-progress-indicator four"></div>
+
+        </div>
+        
+        <div class="row">
+  <div class="col-75">
+    <div class="container-cc">
+      <form action="/">
+
+        <div class="row">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input type="text" id="email" name="email" placeholder="john@example.com">
+            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+            <label for="city"><i class="fa fa-institution"></i> City</label>
+            <input type="text" id="city" name="city" placeholder="Auburn Hills">
+
+            <div class="row">
+              <div class="col-50">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="MI">
+              </div>
+              <div class="col-50">
+                <label for="zip">Zip</label>
+                <input type="text" id="zip" name="zip" placeholder="48309">
+              </div>
+            </div>
+          </div>
+          <div class="col-50">
+            <h3>Payment</h3>
+            <div class="row">             
+            <div class="col-75">
+            <label for="fname">Accepted Cards</label>
+            
+             <div class="icon-container">
+              <i class="fa-brands fa-cc-visa" style="color:navy;"></i>
+              <i class="fa-brands fa-cc-amex" style="color:blue;"></i>
+              <i class="fa-brands fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa-brands fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <label for="ccnum">Credit card number</label>
+              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            </div>
+            
+             <div class="col-15">
+            <label for="expmonth">Exp Month</label>
+            <select name="expmonth">
+                             <option value="0" selected> </option>
+                              <option>01</option>
+                              <option>02</option>
+                              <option>03</option>
+                              <option>04</option>
+                              <option>05</option>
+                              <option>06</option>
+                              <option>07</option>
+                              <option>08</option>
+                              <option>09</option>
+                              <option>10</option>
+                              <option>11</option>
+                              <option>12</option>
+                 </select>  </div>
+                          
+                         <div class="col-15">  <label for="expyear">Exp Year</label>
+                <select name="expyear">
+                             <option value="0" selected> </option>
+                              <option>2022</option>
+                              <option>2023</option>
+                              <option>2024</option>
+                              <option>2025</option>
+                              <option>2026</option>
+                              <option>2027</option>
+                              <option>2028</option>
+                              <option>2029</option>
+                              <option>2030</option>
+                          </select>
+                </div>
+                            <div class="col-15">
+                            <label for="cvv">CVV</label><input type="text" name="cvv" placeholder="123">
+                          
+                          </div>
+                          </div>
+
+            
+         
+
+        </div>
+          </div>
+        <input type="submit" value="Process payment" class="btn">
+      </form>
+    </div>
+  </div>
+
+  
+</div>
+        
+
+  
+       
+    </div>
+    </body>
+</html>
