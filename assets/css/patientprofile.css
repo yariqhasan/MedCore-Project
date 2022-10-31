@@ -102,9 +102,8 @@ body {
   line-height: 60px;
   text-align: start;
   white-space: nowrap;
-  
 }
- .title {
+.title {
   position: relative;
   display: block;
   padding: 0 10px;
@@ -113,10 +112,7 @@ body {
   text-align: start;
   white-space: nowrap;
   font-size: 30px;
-  
 }
-
-
 
 .navigation ul li:hover a::before,
 .navigation ul li.hovered a::before {
@@ -234,6 +230,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 30px;
+  height: auto;
 }
 .cardBox .card {
   position: relative;
@@ -273,7 +270,6 @@ body {
   color: var(--black2);
 }
 
-
 /* Detail Table*/
 .details {
   position: relative;
@@ -298,13 +294,35 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  Padding-top: 5%;
+  padding-top: 5%;
   padding-bottom: 5%;
 }
 
 .cardHeader h2 {
   font-weight: 600;
   color: var(--blue);
+}
+
+.icon {
+  width: 20px;
+}
+
+#icon-modify {
+  filter: invert(63%) sepia(27%) saturate(1179%) hue-rotate(2deg)
+    brightness(88%) contrast(97%);
+}
+
+#button-modify {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 5;
+}
+
+#icon-cancel {
+  filter: invert(33%) sepia(87%) saturate(1253%)
+    hue-rotate(335deg) brightness(82%) contrast(94%);
+  margin-left: 30px;
 }
 
 .btn {
@@ -392,26 +410,25 @@ body {
   font-weight: 500;
 }
 
-
 /* Responsive*/
 
-  .navigation {
-    left: -300px;
-  }
-  .navigation.active {
-    width: 300px;
-    left: 0;
-  }
-  .main {
-    width: 100%;
-    left: 0;
-  }
-  .main.active {
-    left: 300px;
-  }
-  .cardBox {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.navigation {
+  left: -300px;
+}
+.navigation.active {
+  width: 300px;
+  left: 0;
+}
+.main {
+  width: 100%;
+  left: 0;
+}
+.main.active {
+  left: 300px;
+}
+.cardBox {
+  grid-template-columns: repeat(2, 1fr);
+}
 
 @media (max-width: 768px) {
   .details {
@@ -454,6 +471,3 @@ body {
     color: var(--white);
   }
 }
-
-  
-  
