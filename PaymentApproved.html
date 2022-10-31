@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Checkout Cart</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/fontawesome-free/css/all.css" rel="stylesheet">
+
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/checkout.css" rel="stylesheet">
+    
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link
+      href="assets/css/patientprofile.css"
+      rel="stylesheet"
+    />
+    
+      <style>     
+          .payment-container {
+  position: relative;
+  width: 40%;
+}
+      .row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: 40%; /* IE10 */
+  flex-wrap: wrap;
+  margin: 20px 6px 6px 6px;
+}
+
+.col-25 {
+  -ms-flex: 30%; /* IE10 */
+  flex: 25%;
+}
+          
+.col-15 {
+  -ms-flex: 30; /* IE10 */
+  flex: 30%;
+}
+              
+          
+          
+
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; /* IE10 */
+  flex: 75%;
+}
+          
+          .col-52 {
+  -ms-flex: 52%; /* IE10 */
+  flex: 52%;
+}
+
+.col-25, col-15,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container-cc {
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+input[type=text] {
+  width: 550;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+          
+.select {
+  width: 50%;
+  margin-bottom: 20px;
+  padding: 22px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <!--progress bar-->
+        <div class="form-progress">
+            <progress class="form-progress-bar" min="0" max="100" value="0" step="33"
+                aria-labelledby="form-progress-completion"></progress>
+
+            <div class="form-progress-indicator one"></div>
+            <div class="form-progress-indicator two"></div>
+            <div class="form-progress-indicator three"></div>
+            <div class="form-progress-indicator four active"></div>
+
+        </div>
+        <div style="float: right"><i class="fa-solid fa-print" onclick="window.print()"></i> </div>
+        <h3>Payment receipt</h3>
+            <div class="row">             
+              <div class="col-25">
+                <div class="container-cc">
+                    
+                    Thank you for your payment. 
+                    Please print this page for your records. A copy of this receipt has been also sent to john.doe@gmail.com.
+                    
+                    <table>
+                        <tr><td><b>Confirmation number:</b> </td><td>CXD15428663</td></tr>
+                        <tr><td><b>Payment amount:</b> </td><td>$187.99</td></tr>
+                        <tr><td><b>Payment date:</b> </td><td>October 31st, 2022 at 5:45PM EST</td></tr>
+                        <tr><td><b>Payment method:</b> </td><td> Visa ending *3544</td></tr>
+                        <tr><td><b>Billing name:</b> </td><td>John Doe</td></tr>
+                        <tr><td><b>Billing address: </td><td>542 W. 15th Street, Auburn Hills, MI 48326</td></tr>
+                        
+                        
+                    
+                    </table>
+                    
+                    
+
+                </div>
+                <input type="submit" value="Return to billing" class="btn">
+              </div>
+
+
+            </div>
+        
+
+  
+       
+    </div>
+    </body>
+</html>
