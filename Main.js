@@ -130,6 +130,9 @@ app.get("/Profile",(req,res) => {
 app.get("/Patient_entry",(req,res) => {
     res.render('Patient_entry');
 });
+app.get("/Appointment",(req,res) => {
+    res.render('Appointment');
+});
 
 
 // set app port 
