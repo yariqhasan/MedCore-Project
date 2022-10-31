@@ -133,6 +133,9 @@ app.get("/Patient_entry",(req,res) => {
 app.get("/Appointment",(req,res) => {
     res.render('Appointment');
 });
+app.get("/PaymentApproved",(req,res) => {
+    res.render('PaymentApproved');
+});
 
 
 // set app port 
