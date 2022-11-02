@@ -15,11 +15,22 @@ app.use('/vendor',express.static(__dirname+ 'assets/vender'));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
+
+// change to an available localhost port
+// Can use Resource Monitor (Windows) to find available localports
+const localHostPortNum = 1120;
+const schemaName = "clinic_data";
+const dbPassword = "Dy3rmak3r";
+
+// set app port 
+app.listen(localHostPortNum);
+//establish connection to your local database
 const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Fcbayern1",
-    database: "clinic_data"
+    host: "127.0.0.1",
+    user: "admin",
+    password: `${dbPassword}`,
+    database: `${schemaName}`,
+    port: 3306,
 });
 
 // connect to the database
@@ -36,16 +47,21 @@ app.get("",(req,res) => {
 
 
 
-//Login in 
-app.post("/log",encoder, function(req,res){
+app.post("/login",encoder, function(req,res){
     var username = req.body.username;
     var password = req.body.password;
-
-    connection.query("select * from clinic_data.patient_login where username = ? and password = ?",[username,password],function(error,results,fields){
-        if (results.length > 0) {
-            res.redirect("/Profile");
-        } else {
-            res.redirect("/PatientLogin");
+    var email = req.body.email;
+    const loginQuery = `select * from ${schemaName}.login where username = "${username}" and password = "${password}"`
+    const employeeLoginQuery = `select * from ${schemaName}.login where username = "${username}" and password = "${password}"`
+    connection.query(loginQuery, function(error,results,fields){
+        if (results.length > 0 && !error) {
+            // when login is success
+            res.redirect("/profile.html");
+            console.log(`Successfull Login \n Results: ${results}`)
+        } else{
+            // login fails
+            res.redirect("/patient_login.html");
+            console.log(`Failed Login \n Results: ${results}`)
         }
         res.end();
     })
@@ -71,6 +87,33 @@ app.post("/new_entry",encoder, function(req,res){
    });
 
 });
+app.post("/", encoder, function(req, res){
+    var email = req.body.email;
+    var username = req.body.username;
+    var password = req.body.password;
+    var confirmPassword = req.body.confirmPassword;
+    const createAccountQuery = `INSERT INTO ${schemaName}.login (username, password, email) VALUES ("${username}", "${password}", "${email}")`
+    if(!email | !username | !password | !confirmPassword){
+        res.redirect(`/register_account.html`)
+    }
+
+    if(password != confirmPassword) {
+        console.log(error)
+        res.redirect(`/register_account.html`)
+    }
+    connection.query(createAccountQuery, function(error, results, fields){
+        if(!error) {
+            console.log(`User ${username} created successfully`)
+            res.redirect(`/patient_login.html`)
+        }
+        else 
+        {
+            console.log(error)
+            res.redirect(`/register_account.html`)
+        }
+    })
+
+})
 
 //Fetch data from SQL to Table
 
@@ -83,22 +126,6 @@ app.get("/PatientList", (req, res) =>{
          });
     })
  });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // when login is success
 app.get("/admin_login",(req,res) => {
@@ -136,7 +163,6 @@ app.get("/Appointment",(req,res) => {
 app.get("/PaymentApproved",(req,res) => {
     res.render('PaymentApproved');
 });
-
-
-// set app port 
-app.listen(8000);
+app.get("/RegisterAccount.html",function(req,res){
+    res.sendFile(__dirname + "RegisterAccount")
+})
