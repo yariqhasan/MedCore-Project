@@ -39,11 +39,11 @@ app.post("/login",encoder, function(req,res){
     connection.query(`select * from ${schemaName}.login where username = ${username} and password = ${password}`, function(error,results,fields){
         if (results.length > 0 && !error) {
             // when login is success
-            res.redirect("/profile.html");
+            res.redirect("/Profile.html");
             console.log(`Successfull Login \n Results: ${results}`)
         } else{
             // login fails
-            res.redirect("/patient_login.html");
+            res.redirect("/PatientLogin.html");
             console.log(`Failed Login \n Results: ${results}`)
         }
         res.end();
@@ -79,22 +79,22 @@ app.get("/",function(req,res){
 app.get("/index.html",function(req,res){
     res.sendFile(__dirname + "/index.html");
 })
-app.get("/patient_login.html",function(req,res){
-    res.sendFile(__dirname + "/patient_login.html");
+app.get("/PatientLogin.html",function(req,res){
+    res.sendFile(__dirname + "/PatientLogin.html");
 })
 app.get("/admin_login.html",function(req,res){
     res.sendFile(__dirname + "/admin_login.html");
 })
-app.get("/profile.html",function(req,res){
-    res.sendFile(__dirname + "/profile.html")
+app.get("/Profile.html",function(req,res){
+    res.sendFile(__dirname + "/Profile.html")
 })
 app.get("/register_account.html",function(req,res){
     res.sendFile(__dirname + "/register_account.html")
 })
-app.get("/patient_management.html",function(req,res){
-    res.sendFile(__dirname + "/patient_management.html")
+app.get("/PatientManagement.html",function(req,res){
+    res.sendFile(__dirname + "/PatientManagement.html")
 })
-app.get("/patient_list.html",function(req,res){
-    res.sendFile(__dirname + "/patient_list.html")
+app.get("/PatientList.html",function(req,res){
+    res.sendFile(__dirname + "/PatientList.html")
 })
 //#endregion Routes
