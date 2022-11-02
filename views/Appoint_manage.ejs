@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+
+    <title>Appointment Scheduling</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link
+      href="css/patientprofile.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/test.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link
+      href="css/patientprofile.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/test.css">
+  </head>
+
+  <body>
+    <main id="main">
+      <div class="container">
+        <!--Navigation Side Bar-->
+        <div class="navigation">
+          <ul>
+            <li>
+              <a href="index">
+                <span class="title">MedCore</span>
+              </a>
+            </li>
+            <li>
+              <a href="PatientList">
+                <span class="icon"
+                  ><ion-icon name="list-outline"></ion-icon
+                ></span>
+                <span class="nav-items">PatientList</span>
+              </a>
+            </li>
+            <li>
+              <a href="Patient_entry">
+                <span class="icon"
+                  ><ion-icon name="person-add-outline"></ion-icon
+                ></span>
+                <span class="nav-items">New Patient</span>
+              </a>
+            </li>
+            <li>
+              <a href="Appointment">
+                <span class="icon"
+                  ><ion-icon name="time"></ion-icon
+                ></span>
+                <span class="nav-items">Appointment</span>
+              </a>
+            </li>
+            <li>
+              <a href="Check_out">
+                <span class="icon"
+                  ><ion-icon name="cash"></ion-icon
+                ></span>
+                <span class="nav-items">Bill</span>
+              </a>
+            </li>
+            <li>
+              <a href="Chat_bots">
+                <span class="icon"
+                  ><ion-icon name="megaphone-outline"></ion-icon
+                ></span>
+                <span class="nav-items">Help</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="main">
+          <div class="topbar">
+            <div class="toggle">
+              <ion-icon name="menu"></ion-icon>
+            </div>
+            <!--Search Bar-->
+
+            <div class="user">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+              />
+            </div>
+          </div>
+          <!-- number cards -->
+          <div class="table-wrapper">
+            <div class="table-title">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h2>Upcoming Appointments</h2>
+                  
+                </div>
+
+                <div class="col-sm-6">
+                  <a
+                    onclick="openForm()"
+                    class="btn btn-success"
+                    data-toggle="modal"
+                    ><i class="material-icons">&#xE147;</i>
+                    <span>Create new Appointment</span></a
+                  >
+                  <div class="form-popup" id="myForm">
+                    <form action="/action_page.php" class="form-container">
+                      <h2>Add a new Appointment</h2>
+                  
+                      <label for="Name"><b>Patient Name</b></label>
+                      <input id="name" type="text" placeholder="Enter Name" name="name" required>
+                  
+                      <label for="Email"><b>Email Address</b></label>
+                      <input id="email" type="text" placeholder="Enter Email Address" name="email" required>
+                      <label for="Address"><b>Address</b></label>
+                      <input id="address" type="text" placeholder="Enter Address" name="address" required>
+                      <label for="Phone"><b>Phone Number</b></label>
+                      <input id="phone" type="text" placeholder="Enter Phone Number" name="phone" required>
+                  
+                      <button type="submit" onclick="myFunction()" class="btn">Add Appointment</button>
+                      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                  </div>
+               
+                </div>
+              </div>
+            </div>
+            <table id="appointment-table" class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Thomas Hardy</td>
+                  <td>89 Chiaroscuro Rd, Portland, USA</td>
+                  <td>thomashardy@mail.com</td>
+                  <td>(171) 555-2222</td>
+                  <td><a href="CRUD_Edit_admin_appoint" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a></td>
+                  <td><a href="" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="clearfix">
+              <div class="hint-text">
+                Showing <b>5</b> out of <b>25</b> entries
+              </div>
+              <ul class="pagination">
+                <li class="page-item disabled">
+                  <a href="#">Previous</a>
+                </li>
+                <li class="page-item">
+                  <a href="#" class="page-link">1</a>
+                </li>
+                <li class="page-item">
+                  <a href="#" class="page-link">2</a>
+                </li>
+                <li class="page-item active">
+                  <a href="#" class="page-link">3</a>
+                </li>
+                <li class="page-item">
+                  <a href="#" class="page-link">4</a>
+                </li>
+                <li class="page-item">
+                  <a href="#" class="page-link">5</a>
+                </li>
+                <li class="page-item">
+                  <a href="#" class="page-link">Next</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Edit Modal HTML -->
+
+
+
+      <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="./assets/js/appointment.js"></script>
+      <script src="./app.js"></script>
+      <script>
+        let toggle = document.querySelector(".toggle")
+        let navigation = document.querySelector(".navigation")
+        let main = document.querySelector(".main")
+
+        toggle.onclick = function () {
+          navigation.classList.toggle("active")
+          main.classList.toggle("active")
+        }
+
+        let list = document.querySelectorAll(".navigation li")
+        function activeLink() {
+          list.forEach((item) =>
+            item.classList.remove("hovered")
+          )
+          this.classList.add("hovered")
+        }
+        list.forEach((item) =>
+          item.addEventListener("mouseover", activeLink)
+        )
+      </script>
+    </main>
+    <!-- End #main -->
+
+    <div id="preloader"></div>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="js/appointment.js"></script>
+    <script src="vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

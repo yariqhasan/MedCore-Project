@@ -130,12 +130,20 @@ app.get("/Profile",(req,res) => {
 app.get("/Patient_entry",(req,res) => {
     res.render('Patient_entry');
 });
-app.get("/Appointment",(req,res) => {
-    res.render('Appointment');
+app.get("/Appoint_manage",(req,res) => {
+    res.render('Appoint_manage');
 });
 app.get("/PaymentApproved",(req,res) => {
     res.render('PaymentApproved');
 });
+app.get("/Patient_appoint",(req,res) => {
+    res.render('Patient_appoint');
+});
+app.get("/CRUD_Edit_admin_appoint",(req,res) => {
+    res.render('CRUD_Edit_admin_appoint');
+});
+
+
 
 
 // set app port 
