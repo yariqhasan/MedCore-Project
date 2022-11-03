@@ -11,6 +11,13 @@ body {
   border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+#blank {
+  background-color: white;
+  height: 0px;
+  width: 0px;
+  position: absolute;
+}
+
 .table-title {
   padding-bottom: 15px;
   background: #435d7d;
@@ -137,6 +144,10 @@ table.table .avatar {
   font-size: 13px;
 }
 /* Custom checkbox */
+.custom-check {
+  width: 18px;
+  height: 18px;
+}
 .custom-checkbox {
   position: relative;
 }
