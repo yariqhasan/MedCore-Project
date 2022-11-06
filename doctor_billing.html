@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Billing</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/doc_bill.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <br>
+    <br>
+    <br>
+    <form class="title"><b>Patient Bill</b></form>
+    <form class="well form-horizontal" action=" " method="post" id="contact_form">
+        <fieldset>
+            <div class="multi-field-wrapper">
+                <div class="multi-fields">
+                    <div class="multi-field">
+                        <form method="GET" action="">
+                            Service:
+                            <select class="selectpicker" data-show-subtext="true" data-live-search="true">
+                                <option data-subtext="heart_diag">Heart Diagnosis</option>
+                                <option data-subtext="diag_test">Diagnostic Testing</option>
+                                <option data-subtext="specialist">Cardiovascular Specialist</option>
+                                <option data-subtext="consult">Consultation</option>
+                            </select>
+
+                            <button type="button" class="add-field">Add field</button>
+                            <button type="button" class="remove-field">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="multi-field-wrapper2">
+                <div class="multi-fields2">
+                    <div class="multi-field2">
+                        <form method="GET" action="">
+                            Prescription:
+                            <select class="selectpicker2" data-show-subtext="true" data-live-search="true">
+                                <option data-subtext="1">1</option>
+                                <option data-subtext="2">2</option>
+                                <option data-subtext="3">3</option>
+                                <option data-subtext="4">4</option>
+                                <option data-subtext="5">5</option>
+                                <option data-subtext="6">6</option>
+                                <option data-subtext="7">7</option>
+                                <option data-subtext="8">8</option>
+                                <option data-subtext="9">9</option>
+                                <option data-subtext="10">10</option>
+                                <option data-subtext="11">11</option>
+                                <option data-subtext="12">12</option>
+                            </select>
+
+                            <button type="button" class="add-field2">Add field</button>
+                            <button type="button" class="remove-field2">Remove</button>
+                        </form>
+                    </div>
+                </div>
+                <br><br>  
+                <div class="total-price">
+
+                    <table>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td> $50.00</td>
+                        </tr>
+                        <tr>
+                            <td>Tax</td>
+                            <td>$19.50</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>$69.50</td>
+                        </tr>
+                    </table>
+        </fieldset>
+        
+    </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+
+
+    <!-- JS File -->
+    <script src="assets\js\doctor_billing.js"></script>
+
+</body>
+
+</html>
