@@ -56,11 +56,11 @@ app.post("/login",encoder, function(req,res){
     connection.query(loginQuery, function(error,results,fields){
         if (results.length > 0 && !error) {
             // when login is success
-            res.redirect("/profile.html");
+            res.redirect("/Profile");
             console.log(`Successfull Login \n Results: ${results}`)
         } else{
             // login fails
-            res.redirect("/patient_login.html");
+            res.redirect("/PatientLogin");
             console.log(`Failed Login \n Results: ${results}`)
         }
         res.end();
@@ -94,22 +94,22 @@ app.post("/", encoder, function(req, res){
     var confirmPassword = req.body.confirmPassword;
     const createAccountQuery = `INSERT INTO ${schemaName}.login (username, password, email) VALUES ("${username}", "${password}", "${email}")`
     if(!email | !username | !password | !confirmPassword){
-        res.redirect(`/register_account.html`)
+        res.redirect(`/RegisterAccount`)
     }
 
     if(password != confirmPassword) {
         console.log(error)
-        res.redirect(`/register_account.html`)
+        res.redirect(`/RegisterLogin`)
     }
     connection.query(createAccountQuery, function(error, results, fields){
         if(!error) {
             console.log(`User ${username} created successfully`)
-            res.redirect(`/patient_login.html`)
+            res.redirect(`/PatientLogin`)
         }
         else 
         {
             console.log(error)
-            res.redirect(`/register_account.html`)
+            res.redirect(`/RegisterAccount`)
         }
     })
 
@@ -163,6 +163,6 @@ app.get("/Appointment",(req,res) => {
 app.get("/PaymentApproved",(req,res) => {
     res.render('PaymentApproved');
 });
-app.get("/RegisterAccount.html",function(req,res){
-    res.sendFile(__dirname + "RegisterAccount")
-})
+app.get("/RegisterAccount",(req,res) => {
+    res.render('RegisterAccount');
+});
