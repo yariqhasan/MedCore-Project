@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "Fcbayern1",
-    database: "clinic_data"
+    database: "clinic_database"
 });
 
 // connect to the database
@@ -41,7 +41,7 @@ app.post("/log",encoder, function(req,res){
     var username = req.body.username;
     var password = req.body.password;
 
-    connection.query("select * from clinic_data.patient_login where username = ? and password = ?",[username,password],function(error,results,fields){
+    connection.query("select * from clinic_database.patient_login where username = ? and password = ?",[username,password],function(error,results,fields){
         if (results.length > 0) {
             res.redirect("/Profile");
         } else {
@@ -58,11 +58,11 @@ app.post("/new_entry",encoder, function(req,res){
     var first_name = req.body.first_name;
     var last_name = req.body.last_name;
     var contact_num = req.body.contact_num;
-    var address = req.body.address_num;
+    var address = req.body.address;
     var email_addr = req.body.email_addr;
     var sex = req.body.sex;
     
-    var sql = 'insert into clinic_data.patient (PID, first_name, last_name, contact_num, address, email_addr,sex) Values ?';
+    var sql = 'insert into clinic_database.patient (PID, first_name, last_name, contact_num, address, email_addr,sex) Values ?';
     var values = [[PID,first_name,last_name,contact_num,address,email_addr,sex]];
     connection.query(sql, [values], function (err, result) {
         if (err) throw err;
@@ -72,10 +72,31 @@ app.post("/new_entry",encoder, function(req,res){
 
 });
 
-//Fetch data from SQL to Table
+// insert data to the appointment table
+
+app.post("/appointment",encoder, function(req,res){
+    var PID = req.body.PID;
+    var first_name = req.body.first_name;
+    var last_name = req.body.last_name;
+    var contact_num = req.body.contact_num;
+    var address = req.body.address;
+    var email_addr = req.body.email_addr;
+    var sex = req.body.sex;
+    
+    var sql = 'insert into clinic_database.patient (PID, first_name, last_name, contact_num, address, email_addr,sex) Values ?';
+    var values = [[PID,first_name,last_name,contact_num,address,email_addr,sex]];
+    connection.query(sql, [values], function (err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+        res.redirect("/Patient_entry");
+   });
+
+});
+
+//Fetch data from SQL to HTML Table
 
 app.get("/PatientList", (req, res) =>{
-    connection.query('SELECT * FROM clinic_data.patient ',(err, rows) => {
+    connection.query('SELECT * FROM clinic_database.patient ',(err, rows) => {
          if (err) throw err;
          console.log(rows);
          res.render("PatientList",{
@@ -83,14 +104,6 @@ app.get("/PatientList", (req, res) =>{
          });
     })
  });
-
-
-
-
-
-
-
-
 
 
 
@@ -138,6 +151,10 @@ app.get("/PaymentApproved",(req,res) => {
 });
 app.get("/Patient_appoint",(req,res) => {
     res.render('Patient_appoint');
+});
+
+app.get("/doctor_billing",(req,res) => {
+    res.render('doctor_billing');
 });
 app.get("/CRUD_Edit_admin_appoint",(req,res) => {
     res.render('CRUD_Edit_admin_appoint');
