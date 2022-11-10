@@ -27,6 +27,16 @@ $(document).ready(function () {
   })
 })
 
+// function required() {
+//   var empt = document.forms["apt-form"]["name"].value
+//   if (empt == "") {
+//     alert("Please input a Value")
+//     return false
+//   } else {
+//     createRow()
+//   }
+// }
+
 function createRow() {
   var table = document.getElementById("appointment-table")
   var row = table.insertRow(0)
@@ -36,18 +46,21 @@ function createRow() {
   var cell4 = row.insertCell(3)
   var cell5 = row.insertCell(4)
   var cell6 = row.insertCell(5)
+  var cell7 = row.insertCell(6)
 
   var checkbox = document.createElement("input")
   checkbox.type = "checkbox"
-  checkbox.name = "name"
+  checkbox.name = "element"
   checkbox.value = "value"
   checkbox.id = "id"
 
   cell1.appendChild(checkbox)
-  cell2.innerHTML = document.getElementById("name").value
-  cell3.innerHTML = document.getElementById("email").value
-  cell4.innerHTML = document.getElementById("address").value
-  cell5.innerHTML = document.getElementById("phone").value
+  cell2.innerHTML = document.getElementById("firstName").value
+  cell3.innerHTML = document.getElementById("lastName").value
+  cell4.innerHTML = document.getElementById("email").value
+  cell5.innerHTML = document.getElementById("address").value
+  cell6.innerHTML = document.getElementById("phone").value
+  cell7.innerHTML = document.getElementById("doctorsName").value
   console.log(table)
 
   var rows = table.getElementsByTagName("tr")
@@ -60,20 +73,37 @@ function createRow() {
   }
 }
 
-function removeSelected(table) {
-  for (var rowi = table.rows.length; rowi-- > 0; ) {
-    var row = table.rows[rowi]
-    var inputs = row.getElementsByTagName("input")
-    for (var inputi = inputs.length; inputi-- > 0; ) {
-      var input = inputs[inputi]
+// function selectAll(source) {
+//   checkboxes = document.getElementsByName("element")
 
-      if (input.type === "checkbox" && input.checked) {
-        row.parentNode.removeChild(row)
-        break
-      }
-    }
-  }
-}
+//   for (var i = 0, n = checkboxes.length; i < n; i++) {
+//     selectAll = checkboxes[i].checked = source.checked
+//   }
+//   this.onclick = unSelectAll
+
+//   return selectAll
+// }
+
+// function unSelectAll(source) {
+//   checkboxes = document.getElementsByName("element")
+
+//   for (var i = 0, n = checkboxes.length; i < n; i++) {
+//     checkboxes[i].checked = source.checked
+//     checkboxes[i].checked = false
+//   }
+// }
+
+// function deleteSelected() {
+//   var table = document.getElementById("appointment-table")
+//   // table.deleteRow(0)
+//   checkboxes = document.getElementsByName("element")
+//   selectAllBtn = document.getElementById("select")
+
+//   for (var i = 0; i < selectAll; i++) {
+//     table.innerHTML = ""
+//     selectAllBtn.checked = false
+//   }
+// }
 
 function openForm() {
   document.getElementById("myForm").style.display = "block"

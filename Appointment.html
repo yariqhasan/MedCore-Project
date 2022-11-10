@@ -147,50 +147,54 @@
                     <span>Create new Appointment</span></a
                   >
                   <div class="form-popup" id="myForm">
-                    <form action="/action_page.php" class="form-container">
+                    <form action="/action_page.php" class="form-container" name="apt-form">
                       <h2>Add a new Appointment</h2>
                   
-                      <label for="Name"><b>Patient Name</b></label>
-                      <input id="name" type="text" placeholder="Enter Name" name="name" required>
-                  
+                      <label for="Name"><b>Patient First Name</b></label>
+                      <input id="firstName" type="text" placeholder="Enter Name" name="firstName" required>
+                      <label for="Name"><b>Patient Last Name</b></label>
+                      <input id="lastName" type="text" placeholder="Enter Name" name="lastName" required>
                       <label for="Email"><b>Email Address</b></label>
                       <input id="email" type="text" placeholder="Enter Email Address" name="email" required>
                       <label for="Address"><b>Address</b></label>
                       <input id="address" type="text" placeholder="Enter Address" name="address" required>
                       <label for="Phone"><b>Phone Number</b></label>
                       <input id="phone" type="text" placeholder="Enter Phone Number" name="phone" required>
-                      <label for="N/a"><b></b></label>
-                      <input id="blank" type="text" placeholder="" name="" required>
+                      <label for="Name"><b>Doctors Name</b></label>
+                      <input id="doctorsName" type="text" placeholder="Enter Name" name="doctorsName" required>
+                      <label for="na"><b></b></label>
+                      <input id="blank" type="text" placeholder="" name="blank" required>
                   
                       <button type="submit" onclick="createRow()" class="btn">Add Appointment</button>
                       <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                     </form>
                   </div>
-                  <a
-                    href="#deleteEmployeeModal"
+                  <!-- <a
                     class="btn btn-danger"
                     data-toggle="modal"
-                    onclick="removeSelected()"
+                    onclick="deleteSelected()"
                     ><i class="material-icons">&#xE15C;</i>
                     <span>Remove Appointments</span></a
-                  >
+                  > -->
                 </div>
               </div>
             </div>
             <table id="" class="table table-striped table-hover">
               <thead>
                 <tr>
-                  <th>
-                    <span class="custom-checkbox">
-                      <input type="checkbox" id="selectAll" />
+                  <th id="zero">
+                    <span class="">
+                      <input type="checkbox" id="select" onclick="selectAll(this)"/>
                       <label for="selectAll"></label>
                     </span>
                   </th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Address</th>
-                  <th>Phone</th>
-                  <th>Actions</th>
+                  <th id="first">First Name</th>
+                  <th id="second">Last Name</th>
+                  <th id="third">Email</th>
+                  <th id="fourth">Address</th>
+                  <th id="fifth">Phone</th>
+                  <th id = "sixth">Doctors Name</th>
+               
                 </tr>
               </thead>
               </table>
@@ -199,207 +203,112 @@
               <tbody>
                 <tr>
                   <td>
-                    <span class="custom-checkbox">
+                    <span class="">
                       <input
                         type="checkbox"
                         id="checkbox1"
-                        name="options[]"
+                        name="element"
                         value="1"
                       />
                       <label for="checkbox1"></label>
                     </span>
                   </td>
-                  <td>Thomas Hardy</td>
+                  <td>Thomas</td>
+                  <td>Hardy</td>
                   <td>thomashardy@mail.com</td>
                   <td>89 Chiaroscuro Rd, Portland, USA</td>
                   <td>(171) 555-2222</td>
-                  <td>
-                    <a
-                      href="#editEmployeeModal"
-                      class="edit"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Edit"
-                        >&#xE254;</i
-                      ></a
-                    >
-                    <a
-                      href="#deleteEmployeeModal"
-                      class="delete"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Delete"
-                        >&#xE872;</i
-                      ></a
-                    >
+                  <td>Doctor #1</td>
+             
+
+
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <span class="custom-checkbox">
+                    <span class="">
                       <input
                         type="checkbox"
                         id="checkbox2"
-                        name="options[]"
+                        name="element"
                         value="1"
                       />
                       <label for="checkbox2"></label>
                     </span>
                   </td>
-                  <td>Dominique Perrier</td>
+                  <td>Dominique </td>
+                  <td> Perrier</td>
                   <td>dominiqueperrier@mail.com</td>
                   <td>Obere Str. 57, Berlin, Germany</td>
                   <td>(313) 555-5735</td>
-                  <td>
-                    <a
-                      href="#editEmployeeModal"
-                      class="edit"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Edit"
-                        >&#xE254;</i
-                      ></a
-                    >
-                    <a
-                      href="#deleteEmployeeModal"
-                      class="delete"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Delete"
-                        >&#xE872;</i
-                      ></a
-                    >
+                  <td>Doctor #2</td>
+         
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <span class="custom-checkbox">
+                    <span class="">
                       <input
                         type="checkbox"
                         id="checkbox3"
-                        name="options[]"
+                        name="element"
                         value="1"
                       />
                       <label for="checkbox3"></label>
                     </span>
                   </td>
-                  <td>Maria Anders</td>
+                  <td>Maria </td>
+                  <td> Anders</td>
                   <td>mariaanders@mail.com</td>
                   <td>25, rue Lauriston, Paris, France</td>
                   <td>(503) 555-9931</td>
-                  <td>
-                    <a
-                      href="#editEmployeeModal"
-                      class="edit"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Edit"
-                        >&#xE254;</i
-                      ></a
-                    >
-                    <a
-                      href="#deleteEmployeeModal"
-                      class="delete"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Delete"
-                        >&#xE872;</i
-                      ></a
-                    >
+                  <td>Doctor #2</td>
+               
+               
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <span class="custom-checkbox">
+                    <span class="">
                       <input
                         type="checkbox"
                         id="checkbox4"
-                        name="options[]"
+                        name="element"
                         value="1"
                       />
                       <label for="checkbox4"></label>
                     </span>
                   </td>
-                  <td>Fran Wilson</td>
+                  <td>Fran </td>
+                  <td> Wilson</td>
                   <td>franwilson@mail.com</td>
                   <td>C/ Araquil, 67, Madrid, Spain</td>
                   <td>(204) 619-5731</td>
-                  <td>
-                    <a
-                      href="#editEmployeeModal"
-                      class="edit"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Edit"
-                        >&#xE254;</i
-                      ></a
-                    >
-                    <a
-                      href="#deleteEmployeeModal"
-                      class="delete"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Delete"
-                        >&#xE872;</i
-                      ></a
-                    >
+                  <td>Doctor #3</td>
+                
+                
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <span class="custom-checkbox">
+                    <span class="">
                       <input
                         type="checkbox"
                         id="checkbox5"
-                        name="options[]"
+                        name="element"
                         value="1"
                       />
                       <label for="checkbox5"></label>
                     </span>
                   </td>
-                  <td>Martin Blank</td>
+                  <td>Martin </td>
+                  <td> Blank</td>
                   <td>martinblank@mail.com</td>
                   <td>Via Monte Bianco 34, Turin, Italy</td>
                   <td>(480) 631-2097</td>
-                  <td>
-                    <a
-                      href="#editEmployeeModal"
-                      class="edit"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Edit"
-                        >&#xE254;</i
-                      ></a
-                    >
-                    <a
-                      href="#deleteEmployeeModal"
-                      class="delete"
-                      data-toggle="modal"
-                      ><i
-                        class="material-icons"
-                        data-toggle="tooltip"
-                        title="Delete"
-                        >&#xE872;</i
-                      ></a
-                    >
+                  <td>Doctor #1</td>
+          
+                   
                   </td>
                 </tr>
               </tbody>

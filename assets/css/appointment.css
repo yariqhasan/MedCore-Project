@@ -17,7 +17,29 @@ body {
   width: 0px;
   position: absolute;
 }
+#zero {
+  width: 5%;
+}
+#first {
+  width: 11.5%;
+}
+#second {
+  width: 9%;
+}
+#third {
+  width: 23.5%;
+}
+#fourth {
+  width: 27.5%;
+}
+#fifth {
+  padding: 0;
+  width: 13.5%;
+}
 
+#sixth {
+  padding-left: 0;
+}
 .table-title {
   padding-bottom: 15px;
   background: #435d7d;
@@ -185,6 +207,7 @@ table.table .avatar {
   z-index: 3;
   transform: rotateZ(45deg);
 }
+
 .custom-checkbox input[type="checkbox"]:checked + label:before {
   border-color: #03a9f4;
   background: #03a9f4;
