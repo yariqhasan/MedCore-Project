@@ -67,6 +67,27 @@ app.post("/login",encoder, function(req,res){
     })
 })
 
+
+app.post("/admin_login",encoder, function(req,res){
+    var username = req.body.username;
+    var password = req.body.password;
+    var email = req.body.email;
+    const loginQuery = `select * from ${schemaName}.admin where username = "${username}" and password = "${password}"`
+    
+    connection.query(loginQuery, function(error,results,fields){
+        if (results.length > 0 && !error) {
+            // when login is success
+            res.redirect("/Patient_entry");
+            console.log(`Successfull Login \n Results: ${results}`)
+        } else{
+            // login fails
+            res.redirect("/admin_login");
+            console.log(`Failed Login \n Results: ${results}`)
+        }
+        res.end();
+    })
+})
+
 //New Patient Entry Form
 
 app.post("/new_entry",encoder, function(req,res){
