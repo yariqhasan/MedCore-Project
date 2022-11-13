@@ -19,6 +19,7 @@
 
     <!-- Vendor CSS Files -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet">
 
 
     <!-- Template Main CSS File -->
@@ -34,75 +35,56 @@
 
         <!--progress bar-->
         <div class="form-progress">
-            <progress class="form-progress-bar" min="0" max="100" value="0" step="33"
+            <progress class="form-progress-bar" min="0" max="90" value="0" step="45"
                 aria-labelledby="form-progress-completion"></progress>
 
             <div class="form-progress-indicator one active"></div>
             <div class="form-progress-indicator two"></div>
             <div class="form-progress-indicator three"></div>
-
         </div>
 
 
         <!--cart items details-->
         <div class="small-container cart-page">
-            <table>
+            <div class="button"><a href="Profile" class="submit"><i class="fa-solid fa-chart-simple"></i> </i> Return to Dashboard</a></div>
+            <table style=" border-top: 3px solid #1795ce;">
                 <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
+                    <td class="checkout-td-head-l">Item</th>
+                    <td class="checkout-td-head-r">Quantity</th>
+                      <td class="checkout-td-head-r">Date</th>
+                    <td class="checkout-td-head-r">Price</th>
+                    <td class="checkout-td-head-r">Insurance</th>
+                    <td class="checkout-td-head-r" >Balance</th>
+                    
                 </tr>
-                <tr>
-                    <td>
-                        <div class="cart-info">
-                            <img src="">
+
+                <tbody>
+                  <% var total =0;
+                  patient.forEach(function(patient){ %>
+                    <tr>
+                        <td>
+                          <div class="cart-info">
+                            
                             <!--image of item added to cart--->
                             <div>
-                                <p>Azilsartan</p>
-                                <small>Price: $10.00</small>
-                                <br>
-                                <a href="">Remove</a>
+                                
+                                <p> <i class="fa-solid fa-prescription-bottle"></i><%= patient.Name %></p>
+                                
                             </div>
                         </div>
-
-                    </td>
-                    <td><input type="number" value="1"></td>
-                    <td>$10.00</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="cart-info">
-                            <img src="">
-                            <!--image of item added to cart--->
-                            <div>
-                                <p>Losartan</p>
-                                <small>Price: $8.00</small>
-                                <br>
-                                <a href="">Remove</a>
-                            </div>
-                        </div>
-
-                    </td>
-                    <td><input type="number" value="1" ></td>
-                    <td>$8.00</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="cart-info">
-                            <img src="">
-                            <!--image of item added to cart--->
-                            <div>
-                                <p>Valsartan</p>
-                                <small>Price: $13.00</small>
-                                <br>
-                                <a href="">Remove</a>
-                            </div>
-                        </div>
-
-                    </td>
-                    <td><input type="number" value="1"></td>
-                    <td>$13.00</td>
-                </tr>
+                          </td>
+                        <td class="checkout-td-r"><%= patient.quantity %></td>
+                        <td class="checkout-td-r"><%= patient.service_date %></td>
+                        <td class="checkout-td-r">$<%= patient.total_price %></td>
+                        <td class="checkout-td-r">$<%= patient.covered_amount%></td>
+                        <td class="checkout-td-r">$<%= patient.customer_price%></td>
+                        
+                    </tr>
+                <% total =total + patient.customer_price; }); %>
+              </tbody>
+                
+               
+                
             </table>
 
             <div class="total-price">
@@ -110,23 +92,30 @@
                 <table>
                     <tr>
                         <td>Subtotal</td>
-                        <td>$150.00</td>
+                        <td>$<%= total%></td>
                     </tr>
                     <tr>
                         <td>Tax</td>
-                        <td>$19.50</td>
+                        <td>$0.00</td>
                     </tr>
                     <tr>
                         <td>Total</td>
-                        <td>$169.50</td>
+                        <td>$<%= total%></td>
                     </tr>
                 </table>
 
             </div>
             <div class="button">
-                <a href="Payment" class="submit">Continue</button>
+              <form method="post" action="/Payment">
+                <input type="hidden" name="total" value="<%=total %>">
+                <input type="submit" value="Proceed to payment" class="btn">
+                
+
+              </form>              
+                
 
             </div>
+            
         </div>
 
 </html>

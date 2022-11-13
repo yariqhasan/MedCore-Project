@@ -1,6 +1,8 @@
 const mysql = require("mysql");
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
 const encoder = bodyParser.urlencoded();
 
 const app = express();
@@ -10,24 +12,48 @@ app.use('/js',express.static(__dirname+ 'assets/js'));
 app.use('/img',express.static(__dirname+ 'assets/img'));
 app.use('/vendor',express.static(__dirname+ 'assets/vender'));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.static(__dirname));
+
 
 //set views
 app.set('views', './views');
 app.set('view engine', 'ejs');
+
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "6hadnu7iu9809cagediged9832acged790979daged890946898dasikes",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
 
 
 // change to an available localhost port
 // Can use Resource Monitor (Windows) to find available localports
 const localHostPortNum = 1120;
 const schemaName = "clinic_data";
-const dbPassword = "Dy3rmak3r";
+const dbPassword = "admin";
+
+//username and password
+const myusername = ''
+const myuserid=0
+
+
+
+// a variable to save a session
+var session;
+
+
 
 // set app port 
 app.listen(localHostPortNum);
 //establish connection to your local database
 const connection = mysql.createConnection({
     host: "127.0.0.1",
-    user: "admin",
+    user: "mousumi",
     password: `${dbPassword}`,
     database: `${schemaName}`,
     port: 3306,
@@ -45,19 +71,30 @@ app.get("",(req,res) => {
 });
 
 
+app.get('/logout',(req,res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
 
 
 app.post("/login",encoder, function(req,res){
     var username = req.body.username;
     var password = req.body.password;
-    var email = req.body.email;
-    const loginQuery = `select * from ${schemaName}.login where username = "${username}" and password = "${password}"`
-    const employeeLoginQuery = `select * from ${schemaName}.login where username = "${username}" and password = "${password}"`
+    
+    session=req.session;
+   
+    const loginQuery = `select username, email from ${schemaName}.login where username = "${username}" and password = "${password}"`
+    
     connection.query(loginQuery, function(error,results,fields){
         if (results.length > 0 && !error) {
+            console.log(console.log(results[0]));
+            var user_email =results[0].email
             // when login is success
+            session.username =username;
+            session.email = user_email;
+            
             res.redirect("/Profile");
-            console.log(`Successfull Login \n Results: ${results}`)
+            console.log(`Successfull Login \n Results: ${user_email}`)
         } else{
             // login fails
             res.redirect("/PatientLogin");
@@ -72,10 +109,15 @@ app.post("/admin_login",encoder, function(req,res){
     var username = req.body.username;
     var password = req.body.password;
     var email = req.body.email;
-    const loginQuery = `select * from ${schemaName}.admin where username = "${username}" and password = "${password}"`
+    session=req.session;
+    const loginQuery = `select username, email from ${schemaName}.admin where username = "${username}" and password = "${password}"`
     
     connection.query(loginQuery, function(error,results,fields){
         if (results.length > 0 && !error) {
+            session.admin_id =username;
+            session.email =results[0].email;
+            
+
             // when login is success
             res.redirect("/Patient_entry");
             console.log(`Successfull Login \n Results: ${results}`)
@@ -91,6 +133,11 @@ app.post("/admin_login",encoder, function(req,res){
 //New Patient Entry Form
 
 app.post("/new_entry",encoder, function(req,res){
+
+    session=req.session;
+    if(!session.admin_id){
+        res.redirect("/admin_login");
+    }
     var PID = req.body.PID;
     var first_name = req.body.first_name;
     var last_name = req.body.last_name;
@@ -139,6 +186,11 @@ app.post("/", encoder, function(req, res){
 //Fetch data from SQL to Table
 
 app.get("/PatientList", (req, res) =>{
+
+    session=req.session;
+    if(!session.admin_id){
+        res.redirect("/admin_login");
+    }
     connection.query('SELECT * FROM clinic_data.patient ',(err, rows) => {
          if (err) throw err;
          console.log(rows);
@@ -167,23 +219,136 @@ app.get("/PatientList",(req,res) => {
     res.render('PatientList');
 });
 app.get("/Check_out",(req,res) => {
-    res.render('Check_out');
+    session=req.session;
+    if(!session.username){
+        res.redirect("/PatientLogin");
+    }
+
+    var email =session.email;
+
+    var sql =`select medicine.Name, medicine.quantity, bill.total_price, \
+    bill.covered_amount, bill.customer_price, DATE_FORMAT(invoice_date, "%m-%d-%y") as service_date \
+     from patient inner join invoices \
+   on patient.email_addr="${email}" and invoices.patient_id=patient.PID \
+   inner join bill on bill.invoice_num=invoices.invoice_id and isPaid=0 inner join \
+   medicine on medicine.medicine_ID=bill.medicine_ID`
+
+   //console.log(sql);
+
+    connection.query(sql,(err, rows) => {
+        if (err) throw err;
+        console.log(rows);
+        res.render("Check_out",{
+            patient : rows
+        });
+   })
+    
 });
-app.get("/Payment",(req,res) => {
-    res.render('Payment');
+app.post("/Payment", encoder,(req,res) => {
+
+    session=req.session;
+    if(!session.username){
+        res.redirect("/PatientLogin");
+    }
+
+    var email =session.email;
+    var total = req.body.total;
+
+    res.render('Payment', {
+        total : total,
+        email :email
+    });
+});
+
+app.post("/ProcessPayment", encoder,(req,res) => {
+
+    session=req.session;
+    if(!session.username){
+        res.redirect("/PatientLogin");
+    }
+
+    var useremail =session.email;
+    var name =req.body.name;
+    var address =req.body.address;
+    var city =req.body.city;
+    var state =req.body.state;
+    var zip =req.body.zip;
+    var email =req.body.email;
+    var cardname =req.body.cardname;
+    var cardnumber =req.body.cardnumber;
+    var expmonth =req.body.expmonth;
+    var expyear =req.body.expyear;
+    var cvv =req.body.cvv;
+    var amount =req.body.amount;
+    var patient_email =session.email;
+    var d = new Date();
+
+    
+    paymentDate = [ d.getFullYear(),d.getMonth()+1,
+               d.getDate()
+               ].join('-')+' '+
+              [d.getHours(),
+               d.getMinutes(),
+               d.getSeconds()].join(':');
+
+    var expDate = expyear+"/"+expmonth;
+    var fullAddress = address+", "+city+", "+state+" "+zip ;
+
+    //var valid = require("card-validator");
+
+    //var numberValidation = valid.number(cardnumber);
+    //var nameValidation =valid.cardholderName(cardname);
+    //var expValidation =valid.expirationDate(expDate);
+    
+    //if ( nameValidation.isPotentiallyValid & expValidation.isPotentiallyValid)
+    {
+        var cardType="Visa";
+        var randomstring = require("randomstring");
+        var confirmCode = randomstring.generate({ length: 8, capitalization: "uppercase"});
+        var sql = 'insert into processed_payment (confirm_code, amount, billing_name, patient_name,\
+             cardnumber, exp_year, exp_month, cvv,address, \
+            city, state, zip, date, billing_email, patient_email) Values ?';
+        var values = [[confirmCode, amount, cardname, name, cardnumber, expyear, expmonth, cvv, address, city, state, zip, paymentDate, email, patient_email ]];
+        connection.query(sql, [values], function (err, result) {
+            if (err) throw err;
+            console.log("Number of records inserted: " + result.affectedRows);
+            res.render("PaymentApproved", {
+                amount : amount,
+                patient_email :patient_email, 
+                confirmCode: confirmCode,
+                cardType: cardType,
+                paymentDate: paymentDate,
+                cardname: cardname,
+                fullAddress: fullAddress
+
+            });
+       });
+
+    }   
 });
 app.get("/Profile",(req,res) => {
+    if(!session.username){
+        res.redirect("/PatientLogin");
+    }
     res.render('Profile');
 });
 app.get("/Patient_entry",(req,res) => {
+    session=req.session;
+    if(!session.admin_id){
+        res.redirect("/admin_login");
+    }
     res.render('Patient_entry');
 });
 app.get("/Appointment",(req,res) => {
+    session=req.session;
+    if(!session.admin_id){
+        res.redirect("/admin_login");
+    }
     res.render('Appointment');
 });
-app.get("/PaymentApproved",(req,res) => {
-    res.render('PaymentApproved');
-});
+
 app.get("/RegisterAccount",(req,res) => {
+    
+
     res.render('RegisterAccount');
 });

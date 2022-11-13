@@ -159,7 +159,7 @@ span.price {
 
         <!--progress bar-->
         <div class="form-progress">
-            <progress class="form-progress-bar" min="0" max="100" value="0" step="3"
+            <progress class="form-progress-bar" min="0" max="100" value="33" step="2"
                 aria-labelledby="form-progress-completion"></progress>
 
             <div class="form-progress-indicator one"></div>
@@ -171,28 +171,28 @@ span.price {
         <div class="row">
   <div class="col-75">
     <div class="container-cc">
-      <form action="/">
+      <form method="post" action="/ProcessPayment">
 
         <div class="row">
           <div class="col-50">
             <h3>Billing Address</h3>
-            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+            <label for="fname"><i class="fa fa-user"></i> Patient Name</label>
+            <input type="text" id="fname" name="name" placeholder="John M. Doe" required>
             <label for="email"><i class="fa fa-envelope"></i> Email</label>
-            <input type="text" id="email" name="email" placeholder="john@example.com">
+            <input type="text" id="email" name="email" value="<%=email%>">
             <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required>
             <label for="city"><i class="fa fa-institution"></i> City</label>
-            <input type="text" id="city" name="city" placeholder="Auburn Hills">
+            <input type="text" id="city" name="city" placeholder="Auburn Hills" required>
 
             <div class="row">
               <div class="col-50">
                 <label for="state">State</label>
-                <input type="text" id="state" name="state" placeholder="MI">
+                <input type="text" id="state" name="state" placeholder="MI" required>
               </div>
               <div class="col-50">
                 <label for="zip">Zip</label>
-                <input type="text" id="zip" name="zip" placeholder="48309">
+                <input type="text" id="zip" name="zip" placeholder="48309" required>
               </div>
             </div>
           </div>
@@ -209,9 +209,9 @@ span.price {
               <i class="fa-brands fa-cc-discover" style="color:orange;"></i>
             </div>
             <label for="cname">Name on Card</label>
-            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <input type="text" id="cname" name="cardname" placeholder="John More Doe" required>
             <label for="ccnum">Credit card number</label>
-              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required>
             </div>
             
              <div class="col-15">
@@ -247,7 +247,7 @@ span.price {
                           </select>
                 </div>
                             <div class="col-15">
-                            <label for="cvv">CVV</label><input type="text" name="cvv" placeholder="123">
+                            <label for="cvv">CVV</label><input type="text" name="cvv" placeholder="123" required>
                           
                           </div>
                           </div>
@@ -257,7 +257,8 @@ span.price {
 
         </div>
           </div>
-        <input type="submit" value="Process payment" class="btn">
+          <input type="hidden" name="amount" value="<%=total%>">
+        <input type="submit" value="Process payment for $<%=total%>" class="btn">
       </form>
     </div>
   </div>

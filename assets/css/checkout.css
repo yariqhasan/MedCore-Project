@@ -611,6 +611,25 @@
     width: 100%;
     max-width: 400px;
   }
+
+  .checkout-td-head-l{
+    font-weight: bold;
+    text-align: left;
+
+  }
+
+  .checkout-td-head-r{
+    font-weight: bold;
+    text-align: right;
+
+  }
+
+  .checkout-td-r{
+        text-align: right;
+
+  }
+
+
   progress {
     display: block;
     position: relative;
