@@ -44,6 +44,43 @@ app.get("",(req,res) => {
     res.render('index');
 });
 
+app.post('/getMedicineInfo', async (req,res)=>{
+    const query = `select * from ${schemaName}.medicine`;
+    connection.query(query, function(error,results,fields){
+        if(error){
+            console.log(error);
+            throw error;
+        }
+        console.log(results[0].objid);
+    });
+    res.json({results});
+});
+
+app.post('/ownId/setOwnIDDataByLoginId', async (req, res) => {
+    const email = req.body.loginId; //The unique id of a user in your database, usually email or phone
+    const ownIdData = req.body.ownIdData; //OwnID authentication information as string
+    const user = await user.findOne({ email: email }).exec();
+    user.ownIdData = ownIdData;
+    await user.save();
+    return res.sendStatus(204);
+});
+
+app.post('/ownId/getOwnIDDataByLoginId', async (req, res) => {
+    const email = req.body.loginId; //The unique id of a user in your database, usually email or phone
+    const user = await user.findOne({ email: email }).exec();
+    if (!user) { return res.json({ errorCode: 404 }) } //Error code when user doesn't exist
+    res.json({ ownIdData: user.ownIdData }) //OwnID authentication information as string
+});
+
+app.post('/ownId/getSessionByLoginId', async (req, res) => {
+    const sign = require('jwt-encode');
+
+    const email = req.body.loginId; //The unique id of a user in your database, usually email or phone
+    const user = await user.findOne({ email: email }).exec();
+    const jwt = sign({ email: user.email }, 'secret');
+    return res.json({ token: jwt });
+});
+
 
 
 
@@ -54,6 +91,10 @@ app.post("/login",encoder, function(req,res){
     const loginQuery = `select * from ${schemaName}.login where username = "${username}" and password = "${password}"`
     const employeeLoginQuery = `select * from ${schemaName}.login where username = "${username}" and password = "${password}"`
     connection.query(loginQuery, function(error,results,fields){
+        if(username.length == 0 || password.length == 0){
+            res.redirect("PatientLogin");
+            return;
+        }
         if (results.length > 0 && !error) {
             // when login is success
             res.redirect("/Profile");
@@ -78,7 +119,7 @@ app.post("/new_entry",encoder, function(req,res){
     var email_addr = req.body.email_addr;
     var sex = req.body.sex;
     
-    var sql = 'insert into clinic_data.patient (PID, first_name, last_name, contact_num, address, email_addr,sex) Values ?';
+    var sql = `insert into ${schemaName}.patient (PID, first_name, last_name, contact_num, address, email_addr,sex) Values ?`;
     var values = [[PID,first_name,last_name,contact_num,address,email_addr,sex]];
     connection.query(sql, [values], function (err, result) {
         if (err) throw err;
@@ -115,8 +156,8 @@ app.post("/", encoder, function(req, res){
 
 })
 
-//Fetch data from SQL to Table
 
+//Fetch data from SQL to Table
 app.get("/PatientList", (req, res) =>{
     connection.query('SELECT * FROM clinic_data.patient ',(err, rows) => {
          if (err) throw err;
@@ -165,4 +206,7 @@ app.get("/PaymentApproved",(req,res) => {
 });
 app.get("/RegisterAccount",(req,res) => {
     res.render('RegisterAccount');
+});
+app.get("/DoctorBilling", (req,res) => {
+    res.render('DoctorBilling');
 });

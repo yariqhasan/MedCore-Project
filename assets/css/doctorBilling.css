@@ -1,0 +1,27 @@
+.well.form-horizontal {
+    padding: 15px 25px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+.total-price
+  {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .total-price table
+  {
+    border-top: 3px solid #1795ce;
+    width: 100%;
+    max-width: 400px;
+  }
+
+.title
+  {
+    padding: 0px 25px;
+    display: flex;
+    justify-content: center;
+    font-size: 25px
+  }
