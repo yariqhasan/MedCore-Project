@@ -44,12 +44,6 @@
             </a>
           </li>
           <li>
-            <a href="#">
-              <span class="icon"
-                ><ion-icon name="time"></ion-icon
-              ></span>
-              <span class="nav-items">Appointment</span>
-            </a>
           </li>
           <li>
             <a href="Check_out">
@@ -60,14 +54,21 @@
             </a>
           </li>
           <li>
-            <a href="Chat_bots">
+            <a href="Patient_appointment">
+              <span class="icon"
+                ><ion-icon name="time"></ion-icon
+              ></span>
+              <span class="nav-items">Appointment</span>
+            </a>
+          </li>
+          <li>
+            <a href="Chat_bots.html">
               <span class="icon"
                 ><ion-icon name="megaphone-outline"></ion-icon
               ></span>
               <span class="nav-items">Help</span>
             </a>
           </li>
-         
         </ul>
       </div>
       <div class="main">
@@ -90,17 +91,17 @@
         <div class="cardBox">
           <div class="card">
             <div>
-              <div class="numbers"></div>
+              <div class="numbers">Welcome</div>
               <div class="cardName"></div>
             </div>
             <div class="iconBx">
-              <ion-icon name=""></ion-icon>
+              <ion-icon name="person"></ion-icon>
             </div>
           </div>
           <div class="card">
             <div>
               <div class="numbers">Prescription</div>
-              <div class="cardName">Pick-up</div>
+              <div class="cardName"></div>
             </div>
             <div class="iconBx">
               <ion-icon name="heart"></ion-icon>
@@ -108,8 +109,8 @@
           </div>
           <div class="card">
             <div>
-              <div class="numbers">Sep 18 : 2PM </div>
-              <div class="cardName">Appointment</div>
+              <div class="numbers"><span id='datetime'></span></div>
+              <div class="cardName">Today's Date</div>
             </div>
             <div class="iconBx">
               <ion-icon name="time"></ion-icon>
@@ -172,6 +173,11 @@
     <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./app.js"></script>
+    
+    <script>
+      var dt = new Date();
+      document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear());
+      </script>
     <script>
       let toggle = document.querySelector(".toggle");
       let navigation = document.querySelector(".navigation");

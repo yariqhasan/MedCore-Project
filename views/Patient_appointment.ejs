@@ -138,43 +138,12 @@
               <div class="row">
                 <div class="col-sm-6">
                   <h2>Upcoming Appointments</h2>
-                  
-                </div>
-
-                <div class="col-sm-6">
-                  <a
-                    onclick="openForm()"
-                    class="btn btn-success"
-                    data-toggle="modal"
-                    ><i class="material-icons">&#xE147;</i>
-                    <span>Create new Appointment</span></a
-                  >
-                  <div class="form-popup" id="myForm">
-                    <form action="/action_page.php" class="form-container">
-                      <h2>Add a new Appointment</h2>
-                  
-                      <label for="Name"><b>Patient Name</b></label>
-                      <input id="name" type="text" placeholder="Enter Name" name="name" required>
-                  
-                      <label for="Email"><b>Address</b></label>
-                      <input id="email" type="text" placeholder="Enter Email Address" name="email" required>
-                      <label for="Address"><b>Email Address</b></label>
-                      <input id="address" type="text" placeholder="Enter Address" name="address" required>
-                      <label for="Phone"><b>Phone Number</b></label>
-                      <input id="phone" type="text" placeholder="Enter Phone Number" name="phone" required>
-                  
-                      <button type="submit" onclick="myFunction()" class="btn">Add Appointment</button>
-                      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                    </form>
-                  </div>
-               
                 </div>
               </div>
             </div>
             <table id="appointment-table" class="table table-striped table-hover">
               <thead>
                 <tr>
-                  <th>Appointment ID</th>
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Contact</th>
@@ -184,17 +153,14 @@
                 </tr>
               </thead>
               <tbody>
-                  <% appointment.forEach(function(appointment){ %>
+                  <% myappoint.forEach(function(myappoint){ %>
                     <tr>
-                        <td><%= appointment.appoint_num %></td>
-                        <td><%= appointment.patient_first_name %></td>
-                        <td><%= appointment.patient_last_name %></td>
-                        <td><%= appointment.contact_num %></td>
-                        <td><%= appointment.appointment_date %></td>
-                        <td><%= appointment.service_name %></td>
-                        <td><%= appointment.doc_last_name %></td>
-                        <td><a href="edit1/<%= appointment.appoint_num%>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a></td>
-                        <td><a href="delete1/<%= appointment.contact_num%>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
+                        <td><%= myappoint.patient_first_name %></td>
+                        <td><%= myappoint.patient_last_name %></td>
+                        <td><%= myappoint.contact_num %></td>
+                        <td><%= myappoint.appointment_date %></td>
+                        <td><%= myappoint.service_name %></td>
+                        <td><%= myappoint.doc_last_name %></td>
                     </tr>
                   <% }); %>
               </tbody>
