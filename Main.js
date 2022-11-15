@@ -247,9 +247,9 @@ app.get("/edit1/:appoint_id",(req, res) => {
 
 // DELETE ROWS FORM TABLE
 
-app.get('/delete1/:contact',(req, res) =>{
-    const contact = req.params.contact;
-    let sql = `DELETE FROM clinic_database.appointment WHERE contact_num = ${contact}`;
+app.get('/delete1/:appoint_id',(req, res) =>{
+    const appoint_id = req.params.appoint_id;
+    let sql = `DELETE FROM clinic_database.appointment WHERE appoint_num = ${appoint_id}`;
     let query = connection.query(sql, (err, result) =>{
         if(err) throw err;
         res.redirect('/Appoint_manage');
