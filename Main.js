@@ -53,7 +53,7 @@ app.post("/log",encoder, function(req,res){
 
 
 
-// admin login
+// Fetch data from admin table.
 app.post("/admin_log",encoder, function(req,res){
     var email = req.body.email;
     var password = req.body.password;
@@ -66,6 +66,52 @@ app.post("/admin_log",encoder, function(req,res){
         res.end();
     })
 });
+
+
+//Fetch data from Patient table
+
+app.get("/PatientList", (req, res) =>{
+    connection.query('SELECT * FROM clinic_database.patient ',(err, rows) => {
+         if (err) throw err;
+         console.log(rows);
+         res.render("PatientList",{
+             patient : rows
+         });
+    })
+ });
+// Fetch data from appointment table
+ app.get("/Appoint_manage", (req, res) =>{
+    connection.query('SELECT * FROM clinic_database.appointment ',(err, rows) => {
+         if (err) throw err;
+         console.log(rows);
+         res.render("Appoint_manage",{
+             appointment : rows
+         });
+    })
+ });
+
+ app.get("/Patient_appointment", (req, res) =>{
+    
+    connection.query('SELECT `appointment`.`patient_first_name`,`appointment`.`patient_last_name`,`appointment`.`contact_num`,`appointment`.`appointment_date`,`appointment`.`service_name`,`appointment`.`doc_last_name`FROM `clinic_database`.`appointment` WHERE patient_first_name="Yariq"',(err, rows) => {
+         if (err) throw err;
+         console.log(rows);
+         res.render("Patient_appointment",{
+             myappoint : rows
+         });
+    })
+ });
+
+ app.get("/Profile", (req, res) =>{
+    const confirmation_code= req.params.confirm_code;
+    
+    connection.query('SELECT Name,price,quantity FROM clinic_database.medicine',(err, rows) => {
+        if (err) throw err;
+         console.log(rows);
+         res.render("Profile",{
+            medications : rows
+         });
+    })
+ });
 
 
 
@@ -127,10 +173,12 @@ app.post("/appointment",encoder, function(req,res){
     var appointment_date = req.body.appointment_date;
     var service_name = req.body.service_name;
     var doctor = req.body.doctor;
+    let appoint_ID= Math.floor(Math.random() * 100) + 1;
+
 
     
-    var sql = 'insert into clinic_database.appointment (patient_first_name, patient_last_name, contact_num, appointment_date, service_name,doc_last_name) Values ?';
-    var values = [[patient_first_name,patient_last_name,contact_num,appointment_date,service_name,doctor]];
+    var sql = 'insert into clinic_database.appointment (appoint_num, patient_first_name, patient_last_name, contact_num, appointment_date, service_name,doc_last_name) Values ?';
+    var values = [[appoint_ID,patient_first_name,patient_last_name,contact_num,appointment_date,service_name,doctor]];
     connection.query(sql, [values], function (err, result) {
         if (err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
@@ -138,38 +186,37 @@ app.post("/appointment",encoder, function(req,res){
    });
 
 });
+// INSERT INTO Billing Table.
+app.post("/Processpayment",encoder, function(req,res){
+    var patient_name =req.body.patient_name;
+    var address =req.body.address;
+    var city =req.body.city;
+    var state =req.body.state;
+    var zip =req.body.zip;
+    var patient_email =req.body.email;
+    var cardname = req.body.cardname;
+    var cardnumber =req.body.cardnumber;
+    var expmonth =req.body.expmonth;
+    var expyear =req.body.expyear;
+    var cvv =req.body.cvv;
+    var amount =req.body.amount;
+    var patient_email =req.body.patient_email;
+    var date = req.body.date
+    let confirmCode = (Math.random() + 1).toString(36).substring(7).toUpperCase();
 
-//Fetch data from Patient table
 
-app.get("/PatientList", (req, res) =>{
-    connection.query('SELECT * FROM clinic_database.patient ',(err, rows) => {
-         if (err) throw err;
-         console.log(rows);
-         res.render("PatientList",{
-             patient : rows
-         });
-    })
- });
-// Fetch data from appointment table
- app.get("/Appoint_manage", (req, res) =>{
-    connection.query('SELECT * FROM clinic_database.appointment ',(err, rows) => {
-         if (err) throw err;
-         console.log(rows);
-         res.render("Appoint_manage",{
-             appointment : rows
-         });
-    })
- });
 
- app.get("/Patient_appointment", (req, res) =>{
-    connection.query('SELECT `appointment`.`patient_first_name`,`appointment`.`patient_last_name`,`appointment`.`contact_num`,`appointment`.`appointment_date`,`appointment`.`service_name`,`appointment`.`doc_last_name`FROM `clinic_database`.`appointment` where patient_first_name="Yariq"',(err, rows) => {
-         if (err) throw err;
-         console.log(rows);
-         res.render("Patient_appointment",{
-             myappoint : rows
-         });
-    })
- });
+    
+    var sql = 'INSERT INTO clinic_database.processed_payment (confirm_code, amount, billing_name, patient_name, card_name, cardnumber, exp_year, exp_month, cvv, address, city, state, zip, date, billing_email, patient_email) VALUES ?';
+        var values = [[confirmCode,amount,patient_name,patient_name,cardname,cardnumber,expyear,expmonth,cvv,address,city,state,zip, date, patient_email,patient_email]];
+    connection.query(sql, [values], function (err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+        res.redirect("/confirmation");
+   });
+
+});
+
 
 
 
@@ -269,6 +316,10 @@ app.get("/RegisterAccount",(req,res) => {
 
 app.get("/Patient_appointment",(req,res) => {
     res.render('Patient_appointment');
+});
+
+app.get("/confirmation",(req,res) => {
+    res.render('confirmation');
 });
 
 // set app port 

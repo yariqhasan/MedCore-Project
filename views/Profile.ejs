@@ -118,7 +118,7 @@
           </div>
           <div class="card">
             <div>
-              <div class="numbers">$9,000</div>
+              <div class="numbers">$230</div>
               <div class="cardName">Bill</div>
             </div>
             <div class="iconBx">
@@ -139,32 +139,27 @@
         <div class="details">
           <div class="recentBill">
             <div class="cardHeader">
-              <h2>Recent Bill</h2>
+              <h2>MedCore Medication Prices</h2>
             </div>
-            <table>
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Price</td>
-                  <td>Payment</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Doxcycline</td>
-                  <td>$300</td>
-                  <td>Paid</td>
-                </tr>
-                <tr>
-                  <td>Lisinopril </td>
-                  <td>$100</td>
-                  <td>Paid</td>
-                </tr>
-              </tbody>
-            </table>
+            <div style="width: 65%">
+                <table id="myTable">
+                    <tr>
+                      <th>Medication</th>
+                      <th>Amount</th>
+                      <th>Quantity</th>
+                    </tr>
+                  <tbody>
+                      <% medications.forEach(function(medications){ %>
+                        <tr>
+                            <td><%= medications.Name %></td>
+                            <td><%= medications.price %></td>
+                            <td><%= medications.quantity %></td>
+                        </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+             </div>
           </div>
-          <!--Customer List-->
-          
         </div>
       </div>
     </div>
