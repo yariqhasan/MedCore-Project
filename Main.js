@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const encoder = bodyParser.urlencoded();
 
+
 const app = express();
 app.use(express.static('assets'))
 app.use('/css',express.static(__dirname+ 'assets/css'));
@@ -17,8 +18,8 @@ app.set('view engine', 'ejs');
 
 const connection = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "Fcbayern1",
+    user: "sqluser",
+    password: "password",
     database: "clinic_database"
 });
 
@@ -45,7 +46,12 @@ app.post("/log",encoder, function(req,res){
         if (results.length > 0) {
             res.redirect("/Profile");
         } else {
-            res.redirect("/PatientLogin");
+          app.get("/PatientLoginInvalid",(req,res) => {
+            res.render('PatientLoginInvalid');
+          
+        });
+        res.redirect("/PatientLoginInvalid");
+
         }
         res.end();
     })
@@ -61,7 +67,11 @@ app.post("/admin_log",encoder, function(req,res){
         if (results.length > 0) {
             res.redirect("/Patient_entry");
         } else {
-            res.redirect("/admin_login");
+          app.get("/AdminLoginInvalid",(req,res) => {
+            res.render('admin_loginInvalid');
+          
+        });
+        res.redirect("/AdminLoginInvalid");
         }
         res.end();
     })
@@ -157,6 +167,7 @@ app.post("/register", encoder, function(req, res){
         }
         else 
         {
+
             console.log(error)
             res.redirect(`/RegisterAccount`)
         }

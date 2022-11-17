@@ -68,18 +68,19 @@
         <div class="card login-form">
         <div class="card-body">
           <h3 class="card-title text-center">HMS Admin Login-In</h3>
+          <h6 class="card-title text-center" style="color: red">Incorrect Username or Password</h6>
           <div class="card-text">
             <!--
             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
             <form action="/admin_log" method="POST">
               <!-- to error: add class "has-danger" -->
               <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" name = "email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" placeholder="Email">
+                <label  for="email">Email Address</label>
+                <input type="email" style="border: solid 2px red" name = "email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" placeholder="Email" >
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name = "password" class="form-control form-control-sm" id="password" placeholder="Password">
+                <input type="password" style="border: solid 2px red" name = "password" class="form-control form-control-sm" id="password" placeholder="Password">
               </div>
               <button type="submit" class="btn btn-primary btn-block">Sign in</button>
             </form>
