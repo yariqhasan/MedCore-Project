@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MEDCore</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/edit.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <body>
+        
+        <!-- Edit Modal HTML -->
+        <div id="editPlayer">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/appointment_edit" method="post">
+                        <div class="modal-header">						
+                            <h4 class="modal-title">Edit Appointment</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <div class="modal-body">	
+                                <div class="form-group">
+                                    <label> Appointment ID</label>
+                                    <input type="text" class="form-control" value= "<%= appointment.appoint_num %>" name="appoint_num"required>
+                                </div>				
+                                <div class="form-group">
+                                    <label> First Name</label>
+                                    <input type="text" class="form-control" value= "<%= appointment.patient_first_name %>" name="patient_first_name"required>
+                                </div>
+                                <div class="form-group">
+                                    <label> Last Name</label>
+                                    <input type="text" class="form-control" value= "<%= appointment.patient_last_name %>" name="patient_last_name"required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contact</label>
+                                    <input type="text" class="form-control" value="<%= appointment.contact_num %>" name="contact_num"required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Appointment</label>
+                                    <input type="date" class="form-control" value="<%= appointment.appointment_date %>" name="appointment_date"required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Service Provide</label>
+                                    <input type="text" class="form-control" value="<%= appointment.service_name %>" name="service_name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Doctor Last Name</label>
+                                    <input type="text" class="form-control" value="<%= appointment.doc_last_name %>" name="doc_last_name" required>
+                                </div>
+                            </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" a>
+                            <input type="submit" class="btn btn-info" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            $(document).ready(function(){
+                // Activate tooltip
+                $('[data-toggle="tooltip"]').tooltip();
+                
+                // Select/Deselect checkboxes
+                var checkbox = $('table tbody input[type="checkbox"]');
+                $("#selectAll").click(function(){
+                    if(this.checked){
+                        checkbox.each(function(){
+                            this.checked = true;                        
+                        });
+                    } else{
+                        checkbox.each(function(){
+                            this.checked = false;                        
+                        });
+                    } 
+                });
+                checkbox.click(function(){
+                    if(!this.checked){
+                        $("#selectAll").prop("checked", false);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

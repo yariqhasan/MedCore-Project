@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -25,15 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
-  <script>
-    ((o,w,n,i,d)=>{o[i]=o[i]||((...a)=>{return(o[i].q=o[i].q||[]).push(a),Promise.resolve({error:null,data:null})});
-    d=w.createElement('script');d.src=n;d.async=1;w.head.appendChild(d);
-    })(window,document,'https://cdn.ownid.com/js/sdk.js','ownid');
-    ownid('init', { 
-      appId: 'r09icfrr5wumq3',
-      infoTooltip: true
-    });
- </script>
+
 
 </head>
 
@@ -75,48 +68,33 @@
         <div class="card login-form">
         <div class="card-body">
           <h3 class="card-title text-center">Patient Login-In</h3>
+          <h6 class="card-title text-center" style="color: red">Incorrect Username or Password</h6>
           <div class="card-text">
             <!--
             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
-            <form action="/login" method="POST">
+            <form action="/log" method="POST">
               <!-- to error: add class "has-danger" -->
-               <form class="form-group" action="/loginOwnId" method="POST">
-                  <label for="email">Username</label>
-                  <input type="username" name="username"class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
-
-                  <label for="password">Password</label>
-                  <a href="#" style="float:right;font-size:12px;">Forgot password?</a>
-                  <input type="new-password" name="password" class="form-control form-control-sm" id="password">
-                  <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-              </form>
+              <div class="form-group">
+                  <label for="exampleInputEmail1">Username</label>
+                  <input type="username" style="border: solid 2px red" name="username"class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <a href="#"  style="float:right;font-size:12px;">Forgot password?</a>
+                  <input type="password" style="border: solid 2px red" name="password" class="form-control form-control-sm" id="exampleInputPassword1">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Sign in</button>
               
               <div class="sign-up">
                 Don't have an account? <a href="RegisterAccount">Create One</a>
               </div>
             </form>
-            <script>
-              ownid("login", {
-                  variant: 'button',
-                  infoTooltip: true,
-                  loginIdField: document.getElementById("email"),
-                  passwordField: document.getElementById("password"),
-                  onError: (error) => console.log(error),
-                  onLogin: function (data) {
-                      //setting user session
-                      localStorage.setItem('data', JSON.stringify({ token: data.token }));
-                      //redirecting user to the account page
-                      window.location.href = 'Profile';
-                  }
-              });
-          </script>
           </div>
         </div>
       </div>
       </div>
       
     </section>
-    <body>
-  </body>
 
   </main><!-- End #main -->
 
@@ -128,7 +106,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>MedCore</h3>
+            <h3>Medilab</h3>
             <p>
               2609 E Hammer Ln <br>
               Stockton, CA 95210<br>

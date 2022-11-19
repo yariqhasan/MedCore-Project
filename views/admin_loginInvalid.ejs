@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -25,15 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
-  <script>
-    ((o,w,n,i,d)=>{o[i]=o[i]||((...a)=>{return(o[i].q=o[i].q||[]).push(a),Promise.resolve({error:null,data:null})});
-    d=w.createElement('script');d.src=n;d.async=1;w.head.appendChild(d);
-    })(window,document,'https://cdn.ownid.com/js/sdk.js','ownid');
-    ownid('init', { 
-      appId: 'r09icfrr5wumq3',
-      infoTooltip: true
-    });
- </script>
+
 
 </head>
 
@@ -47,7 +40,7 @@
 
       <h1 class="logo me-auto"><a href="index">MedCore</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <!-- <a href="index" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
 
     </div>
@@ -60,10 +53,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Patient Login-In</h2>
+          <h2>Admin Login-In</h2>
           <ol>
             <li><a href="index">Home</a></li>
-            <li>Patient Login</li>
+            <li>Admin Login</li>
           </ol>
         </div>
 
@@ -74,49 +67,29 @@
       <div class="global-container">
         <div class="card login-form">
         <div class="card-body">
-          <h3 class="card-title text-center">Patient Login-In</h3>
+          <h3 class="card-title text-center">HMS Admin Login-In</h3>
+          <h6 class="card-title text-center" style="color: red">Incorrect Username or Password</h6>
           <div class="card-text">
             <!--
             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
-            <form action="/login" method="POST">
+            <form action="/admin_log" method="POST">
               <!-- to error: add class "has-danger" -->
-               <form class="form-group" action="/loginOwnId" method="POST">
-                  <label for="email">Username</label>
-                  <input type="username" name="username"class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
-
-                  <label for="password">Password</label>
-                  <a href="#" style="float:right;font-size:12px;">Forgot password?</a>
-                  <input type="new-password" name="password" class="form-control form-control-sm" id="password">
-                  <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-              </form>
-              
-              <div class="sign-up">
-                Don't have an account? <a href="RegisterAccount">Create One</a>
+              <div class="form-group">
+                <label  for="email">Email Address</label>
+                <input type="email" style="border: solid 2px red" name = "email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" placeholder="Email" >
               </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" style="border: solid 2px red" name = "password" class="form-control form-control-sm" id="password" placeholder="Password">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Sign in</button>
             </form>
-            <script>
-              ownid("login", {
-                  variant: 'button',
-                  infoTooltip: true,
-                  loginIdField: document.getElementById("email"),
-                  passwordField: document.getElementById("password"),
-                  onError: (error) => console.log(error),
-                  onLogin: function (data) {
-                      //setting user session
-                      localStorage.setItem('data', JSON.stringify({ token: data.token }));
-                      //redirecting user to the account page
-                      window.location.href = 'Profile';
-                  }
-              });
-          </script>
           </div>
         </div>
       </div>
       </div>
       
     </section>
-    <body>
-  </body>
 
   </main><!-- End #main -->
 
@@ -128,7 +101,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>MedCore</h3>
+            <h3>MedCare</h3>
             <p>
               2609 E Hammer Ln <br>
               Stockton, CA 95210<br>

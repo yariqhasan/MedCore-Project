@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const encoder = bodyParser.urlencoded({extended: true});
+const encoder = bodyParser.urlencoded();
+
 
 const app = express();
 app.use(express.static('assets'))
@@ -73,7 +74,7 @@ app.post("/login",encoder, function(req,res){
                 console.log(`Successfull Login \n Results: ${results}`)
             } else{
                 // login fails
-                res.redirect("/PatientLogin");
+                res.redirect("/PatientLoginInvalid");
                 console.log(`Failed Login \n Results: ${results}`)
             }
             res.end();
@@ -89,7 +90,7 @@ app.post("/new_entry",encoder, function(req,res){
     var first_name = req.body.first_name;
     var last_name = req.body.last_name;
     var contact_num = req.body.contact_num;
-    var address = req.body.address_num;
+    var address = req.body.address;
     var email_addr = req.body.email_addr;
     var sex = req.body.sex;
     
@@ -124,13 +125,11 @@ app.post("/register", encoder, function(req, res){
             return res.redirect(`/RegisterAccount`);
         }
     })
-
-})
+});
 //#endregion
 
-//#region PatientList
 app.get("/PatientList", (req, res) =>{
-    assets.connection.query(`SELECT * FROM ${assets.schemaName}.patient `,(err, rows) => {
+    connection.query('SELECT * FROM clinic_data.patient ',(err, rows) => {
          if (err) throw err;
          console.log(rows);
          res.render("PatientList",{
@@ -138,12 +137,7 @@ app.get("/PatientList", (req, res) =>{
          });
     })
  });
- //#endregion
-
-//#region Routes
-app.get("",(req,res) => {
-    res.render('index');
-});
+// when login is success
 app.get("/admin_login",(req,res) => {
     res.render('admin_login');
 });
@@ -173,16 +167,43 @@ app.get("/Profile",(req,res) => {
 app.get("/Patient_entry",(req,res) => {
     res.render('Patient_entry');
 });
-app.get("/Appointment",(req,res) => {
-    res.render('Appointment');
+app.get("/Appoint_manage",(req,res) => {
+    res.render('Appoint_manage');
 });
 app.get("/PaymentApproved",(req,res) => {
     res.render('PaymentApproved');
 });
+app.get("/Patient_appoint",(req,res) => {
+    res.render('Patient_appoint');
+});
+
+app.get("/doctor_billing",(req,res) => {
+    res.render('doctor_billing');
+});
+app.get("/CRUD_Edit_admin_appoint",(req,res) => {
+    res.render('CRUD_Edit_admin_appoint');
+});
+
 app.get("/RegisterAccount",(req,res) => {
     res.render('RegisterAccount');
 });
-app.get("/DoctorBilling", (req,res) => {
-    res.render('DoctorBilling');
+
+app.get("/Patient_appointment",(req,res) => {
+    res.render('Patient_appointment');
 });
-//#endregion
+
+app.get("/confirmation",(req,res) => {
+    res.render('confirmation');
+});
+app.get("/PatientLoginInvalid",(req,res) => {
+    res.render('PatientLoginInvalid');
+});
+app.get("/admin_loginInvalid",(req,res) => {
+    res.render('admin_loginInvalid');
+});
+
+app.get("/chat",(req,res) => {
+    res.render('admin_loginInvalid');
+});
+
+
