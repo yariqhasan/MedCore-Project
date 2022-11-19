@@ -1,6 +1,5 @@
 const mysql = require("mysql2");
 
-const localHostPortNum = 1120;
 const schemaName = "clinic_data";
 const dbPassword = "Dy3rmak3r";
 
