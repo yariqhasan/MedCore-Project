@@ -26,6 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
+  <script>src="js/"</script>
   <script>
     ((o,w,n,i,d)=>{o[i]=o[i]||((...a)=>{return(o[i].q=o[i].q||[]).push(a),Promise.resolve({error:null,data:null})});
     d=w.createElement('script');d.src=n;d.async=1;w.head.appendChild(d);
@@ -77,39 +78,23 @@
           <div class="card-text">
             <!--
             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
-            <form action="/" method="POST">
+            <form action="/register" method="POST">
               <!-- to error: add class "has-danger" -->
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email (optional)</label>
-                <input type="email" name="email"class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
-              </div>
-              <div class="form-group">
-                  <label for="exampleInputUsername1">Username</label>
-                  <input type="username" name="username"class="form-control form-control-sm" id="exampleInputUser1" aria-describedby="userHelp">
-              </div>
-              <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" name="password" class="form-control form-control-sm" id="exampleInputPassword1">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                <input type="password" name="confirmPassword" class="form-control form-control-sm" id="exampleInputConfirmPassword1">
-            </div>
-              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              <form class="form-group" onsubmit="return onRegister(this);return false" action="/register" method="post">
+                <label for="email">Username</label>
+                <input type="username" name="username"class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
+
+                <label for="password">Password</label>
+                <input type="new-password" name="password" class="form-control form-control-sm" id="password">
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </form>
               </div>
             </form>
             <script>
-              function onSubmit(userData) {
-              //Call your existing registration logic in the backend
-              return register({ ...userData, ...{ ownIdData: ownIdDataString } });
-    }
-                var ownIdDataString;
-        
-                function onSubmit(userData) {
-                    //Call your existing registration logic in the backend
-                    return register({ ...userData, ...{ ownIdData: ownIdDataString } });
-                }
-        
+              var ownIdDataString;
+              function onRegister(ownIdData){
+                return httpPostRequest('/register',);
+              }
                 ownid("register", {
                     variant: 'button-fingerprint',
                     infoTooltip: true,

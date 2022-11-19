@@ -33,6 +33,7 @@ app.post('/setOwnIDDataByLoginId', async (req, res) => {
         return res.json({errorCode: 404})
     }
     assets.saveUserByEmail(req.body.loginId,req.ownIdData);
+    res.redirect('PatientLogin');
     return res.sendStatus(204);
 });
 
@@ -59,25 +60,25 @@ app.post('/getSessionByLoginId', async (req, res) => {
 app.post("/login",encoder, function(req,res){
     var username = req.body.username;
     var password = req.body.password;
-    var email = req.body.email;
     const loginQuery = `select * from ${assets.schemaName}.login where username = "${username}" and password = "${password}"`
-    const employeeLoginQuery = `select * from ${assets.schemaName}.login where username = "${username}" and password = "${password}"`
-    assets.connection.query(loginQuery, function(error,results,fields){
-        if(username.length == 0 || password.length == 0){
-            res.redirect("PatientLogin");
-            return;
-        }
-        if (results.length > 0 && !error) {
-            // when login is success
-            res.redirect("/Profile");
-            console.log(`Successfull Login \n Results: ${results}`)
-        } else{
-            // login fails
-            res.redirect("/PatientLogin");
-            console.log(`Failed Login \n Results: ${results}`)
-        }
-        res.end();
-    })
+    if((username && password) != null){
+        assets.connection.query(loginQuery, function(error,results,fields){
+            if(username.length == 0 || password.length == 0){
+                res.redirect("PatientLogin");
+                return;
+            }
+            if (results.length > 0 && !error) {
+                // when login is success
+                res.redirect("/Profile");
+                console.log(`Successfull Login \n Results: ${results}`)
+            } else{
+                // login fails
+                res.redirect("/PatientLogin");
+                console.log(`Failed Login \n Results: ${results}`)
+            }
+            res.end();
+        })
+    }
 })
 //#endregion
 
@@ -104,35 +105,28 @@ app.post("/new_entry",encoder, function(req,res){
 //#endregion
 
 //#region CreateUser
-app.post("/", encoder, function(req, res){
+app.post("/register", encoder, function(req, res){
     var email = req.body.email;
     var username = req.body.username;
     var password = req.body.password;
-    var confirmPassword = req.body.confirmPassword;
     const createAccountQuery = `INSERT INTO ${assets.schemaName}.login (username, password, email) VALUES ("${username}", "${password}", "${email}")`
-    if(!email | !username | !password | !confirmPassword){
-        res.redirect(`/RegisterAccount`)
-    }
-
-    if(password != confirmPassword) {
-        console.log(error)
-        res.redirect(`/RegisterLogin`)
+    if(!username | !password){
+        return res.redirect(`/RegisterAccount`);
     }
     assets.connection.query(createAccountQuery, function(error, results, fields){
         if(!error) {
             console.log(`User ${username} created successfully`)
-            res.redirect(`/PatientLogin`)
+            return res.redirect(`/PatientLogin`);
         }
         else 
         {
             console.log(error)
-            res.redirect(`/RegisterAccount`)
+            return res.redirect(`/RegisterAccount`);
         }
     })
 
 })
 //#endregion
-
 
 //#region PatientList
 app.get("/PatientList", (req, res) =>{
