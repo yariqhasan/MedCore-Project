@@ -18,8 +18,8 @@ app.set('view engine', 'ejs');
 
 const connection = mysql.createConnection({
     host: "localhost",
-    user: "sqluser",
-    password: "password",
+    user: "root",
+    password: "Fcbayern1",
     database: "clinic_database"
 });
 
@@ -331,6 +331,16 @@ app.get("/Patient_appointment",(req,res) => {
 
 app.get("/confirmation",(req,res) => {
     res.render('confirmation');
+});
+
+
+app.get("/PatientLoginInvalid",(req,res) => {
+    res.render('PatientLoginInvalid');
+});
+
+
+app.get("/admin_loginInvalid",(req,res) => {
+    res.render('admin_loginInvalid');
 });
 
 // set app port 
