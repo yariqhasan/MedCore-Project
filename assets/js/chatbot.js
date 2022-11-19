@@ -110,7 +110,7 @@ function respond(msg) {
   else {
     document.getElementById("typing").style.display = "none"
     createResponder(
-      'Sorry, I\'m unable to process this request. If you\'d like to speak with an admin, go to this page: <a href="/Chat_bots">Login</a> '
+      'Sorry, I\'m unable to process this request. If you\'d like to speak with an admin, go to this page: N/A '
     )
   }
   //   fetch(`${url}/${id}/respond`, {
