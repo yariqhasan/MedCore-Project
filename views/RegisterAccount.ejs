@@ -26,6 +26,12 @@
 
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
+  <script>
+    ((o,w,n,i,d)=>{o[i]=o[i]||((...a)=>{return(o[i].q=o[i].q||[]).push(a),Promise.resolve({error:null,data:null})});
+    d=w.createElement('script');d.src=n;d.async=1;w.head.appendChild(d);
+    })(window,document,'https://cdn.ownid.com/js/sdk.js','ownid');
+    ownid('init', { appId: 'r09icfrr5wumq3' });
+ </script>
 
 
 </head>
@@ -62,7 +68,7 @@
 
       </div>
     </section><!-- End Breadcrumbs Section -->
-
+  </body>
     <section class="inner-page">
       <div class="global-container">
         <div class="card login-form">
@@ -90,15 +96,35 @@
                 <input type="password" name="confirmPassword" class="form-control form-control-sm" id="exampleInputConfirmPassword1">
             </div>
               <button type="submit" class="btn btn-primary btn-block">Submit</button>
-              
-              <div class="sign-up">
-                Don't have an account? <a href="RegisterAccount">Create One</a>
               </div>
             </form>
+            <script>
+              function onSubmit(userData) {
+              //Call your existing registration logic in the backend
+              return register({ ...userData, ...{ ownIdData: ownIdDataString } });
+    }
+                var ownIdDataString;
+        
+                function onSubmit(userData) {
+                    //Call your existing registration logic in the backend
+                    return register({ ...userData, ...{ ownIdData: ownIdDataString } });
+                }
+        
+                ownid("register", {
+                    variant: 'button-fingerprint',
+                    infoTooltip: true,
+                    passwordField: document.getElementById("password"),
+                    loginIdField: document.getElementById("email"),
+                    onError: (error) => console.log(error),
+                    onRegister: (ownIdData) => ownIdDataString = ownIdData,
+                });
+            </script>
           </div>
         </div>
       </div>
       </div>
+      <body>
+    </body>
       
     </section>
 

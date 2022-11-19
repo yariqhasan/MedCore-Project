@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -26,7 +25,12 @@
 
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
-
+  <script>
+    ((o,w,n,i,d)=>{o[i]=o[i]||((...a)=>{return(o[i].q=o[i].q||[]).push(a),Promise.resolve({error:null,data:null})});
+    d=w.createElement('script');d.src=n;d.async=1;w.head.appendChild(d);
+    })(window,document,'https://cdn.ownid.com/js/sdk.js','ownid');
+    ownid('init', { appId: 'r09icfrr5wumq3' });
+ </script>
 
 </head>
 
@@ -74,13 +78,13 @@
             <form action="/login" method="POST">
               <!-- to error: add class "has-danger" -->
               <div class="form-group">
-                  <label for="exampleInputEmail1">Username</label>
-                  <input type="username" name="username"class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <label for="email">Username</label>
+                  <input type="username" name="username"class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
               </div>
               <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
+                  <label for="password">Password</label>
                   <a href="#" style="float:right;font-size:12px;">Forgot password?</a>
-                  <input type="password" name="password" class="form-control form-control-sm" id="exampleInputPassword1">
+                  <input type="password" name="password" class="form-control form-control-sm" id="password">
               </div>
               <button type="submit" class="btn btn-primary btn-block">Sign in</button>
               
@@ -88,12 +92,29 @@
                 Don't have an account? <a href="RegisterAccount">Create One</a>
               </div>
             </form>
+            <script>
+              ownid("login", {
+                  variant: 'button-fingerprint',
+                  infoTooltip: true,
+                  loginIdField: document.getElementById("email"),
+                  passwordField: document.getElementById("password"),
+                  onError: (error) => console.log(error),
+                  onLogin: function (data) {
+                      //setting user session
+                      localStorage.setItem('data', JSON.stringify({ token: data.token }));
+                      //redirecting user to the account page
+                      window.location.href = '/profile';
+                  }
+              });
+          </script>
           </div>
         </div>
       </div>
       </div>
       
     </section>
+    <body>
+  </body>
 
   </main><!-- End #main -->
 
