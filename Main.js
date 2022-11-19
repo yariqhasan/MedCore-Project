@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
   }));
 
 //include folder
-const myFilePath = `/home/muszyn/Documents`
+const myFilePath = String.raw`/home/muszyn/Documents`;
 const assets = require(`${myFilePath}/MedCore-Project/assets/js/queryFunctions`);
 //set views
 app.set('views', './views');
