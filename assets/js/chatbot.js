@@ -74,9 +74,40 @@ function respond(msg) {
   if (msg.includes("billing")) {
     document.getElementById("typing").style.display = "none"
     createResponder(
-      ' View the billing page after logging in here: <a href="/PatientLogin">Login</a>'
+      ' View the billing page after logging in here: Login'
     )
-  } else {
+  } else if (msg.includes("appointment")){
+    document.getElementById("typing").style.display = "none"
+    createResponder(
+      ' You can make the appointment on our home page at the appointment section'
+    )
+  }
+  else if (msg.includes("how to check my appointment")){
+    document.getElementById("typing").style.display = "none"
+    createResponder(
+      ' You can check you appointment on your profile account once you login and locate to the appointment section.'
+    )
+  }
+  else if (msg.includes("Speak to a associate")){
+    document.getElementById("typing").style.display = "none"
+    createResponder(
+      ' You can speak to an associate on the help section on located on your profile.'
+    )
+  }
+  else if (msg.includes("how are you")){
+    document.getElementById("typing").style.display = "none"
+    createResponder(
+      ' Im doing great, at your service.'
+    )
+  }
+  else if (msg.includes("Didn't recieve my medical report")){
+    document.getElementById("typing").style.display = "none"
+    createResponder(
+      ' You can speak to an associate to help you with the issue on help section on located on your profile.'
+    )
+  }
+  
+  else {
     document.getElementById("typing").style.display = "none"
     createResponder(
       'Sorry, I\'m unable to process this request. If you\'d like to speak with an admin, go to this page: <a href="/Chat_bots">Login</a> '

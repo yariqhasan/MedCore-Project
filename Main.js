@@ -343,5 +343,11 @@ app.get("/admin_loginInvalid",(req,res) => {
     res.render('admin_loginInvalid');
 });
 
+app.get("/chat",(req,res) => {
+    res.render('admin_loginInvalid');
+});
+
+
+
 // set app port 
 app.listen(8000);
