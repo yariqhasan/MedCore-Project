@@ -113,33 +113,7 @@ function respond(msg) {
       'Sorry, I\'m unable to process this request. If you\'d like to speak with an admin, go to this page: N/A '
     )
   }
-  //   fetch(`${url}/${id}/respond`, {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //   })
-
-  // .then(function (response) {
-  //   document.getElementById("typing").style.display = "none"
-  //   return response.json()
-  // })
-  // .then(function (responses) {
-  //   console.log(responses)
-  //   if (responses) {
-  //     for (let response of responses) {
-  //       createResponder(response.text)
-  //     }
-  //   } else {
-  //     createResponder(
-  //       "Sorry, I'm having trouble understanding you, try asking me in an other way"
-  //     )
-  //   }
-  // })
-  // .catch(function (err) {
-  //   document.getElementById("typing").style.display = "none"
-  //   createResponder(
-  //     "I'm having some technical issues. Try again later :)"
-  //   )
-  // })
+  
 }
 
 function voice() {
