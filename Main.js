@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const { getUserByEmail } = require("./assets/js/queryFunctions");
 const encoder = bodyParser.urlencoded({extended: true});
 
 
@@ -34,7 +35,6 @@ app.post('/setOwnIDDataByLoginId', async (req, res) => {
         return res.json({errorCode: 404})
     }
     assets.saveUserByEmail(req.body.loginId,req.ownIdData);
-    res.redirect('PatientLogin');
     return res.sendStatus(204);
 });
 
@@ -56,7 +56,6 @@ app.post('/getSessionByLoginId', async (req, res) => {
     res.json({token: jwt});
 });
 //#endregion
-
 //#region Login
 app.post("/login",encoder, function(req,res){
     var username = req.body.username;
@@ -80,7 +79,31 @@ app.post("/login",encoder, function(req,res){
             res.end();
         })
     }
-})
+});
+// Fetch data from admin table.
+app.post("/admin_log",encoder, function(req,res){
+    var username = req.body.email;
+    var password = req.body.password;
+    const loginQuery = `select * from ${assets.schemaName}.login where email = "${username}" and password = "${password}"`
+
+        if((username && password) != null){
+            assets.connection.query(loginQuery, function(error,results,fields){
+                if(username.length == 0 || password.length == 0){
+                    res.redirect("/admin_login");
+                    return;
+                }
+                if (results.length > 0 && !error) {
+                    // when login is success
+                    res.redirect("/Patient_entry");
+                    console.log(`Successfull Login \n Results: ${results}`)
+                } else{
+                    // login fails
+                    res.redirect("/admin_loginInvalid");
+                    console.log(`Failed Login \n Results: ${results}`)
+                }
+                res.end();
+})}
+        });
 //#endregion
 
 //#region New Entry
@@ -117,7 +140,7 @@ app.post("/register", encoder, function(req, res){
     assets.connection.query(createAccountQuery, function(error, results, fields){
         if(!error) {
             console.log(`User ${username} created successfully`)
-            return res.redirect(`/PatientLogin`);
+            return res.redirect(`/Profile`);
         }
         else 
         {
@@ -127,9 +150,9 @@ app.post("/register", encoder, function(req, res){
     })
 });
 //#endregion
-
+//Fetch data from Patient table
 app.get("/PatientList", (req, res) =>{
-    connection.query('SELECT * FROM clinic_data.patient ',(err, rows) => {
+    assets.connection.query(`SELECT * FROM ${assets.schemaName}.patient `,(err, rows) => {
          if (err) throw err;
          console.log(rows);
          res.render("PatientList",{
@@ -137,17 +160,144 @@ app.get("/PatientList", (req, res) =>{
          });
     })
  });
+// Fetch data from appointment table
+ app.get("/Appoint_manage", (req, res) =>{
+    assets.connection.query(`SELECT * FROM ${assets.schemaName}.appointment `,(err, rows) => {
+         if (err) throw err;
+         console.log(rows);
+         res.render("Appoint_manage",{
+             appointment : rows
+         });
+    })
+ });
+
+ app.get("/Patient_appointment", (req, res) =>{
+    var loggedInUser =  'Yariq';
+    assets.connection.query(`SELECT doc_last_name, patient_last_name, contact_num, date, appointment_date, patient_first_name, 
+        service_name FROM ${assets.schemaName}.appointment WHERE patient_first_name = "${loggedInUser}"`,(err, rows) => {
+         if (err) throw err;
+         console.log(rows);
+         res.render("Patient_appointment",{
+             myappoint : rows
+         });
+    })
+ });
+
+ app.get("/Profile", (req, res) =>{
+    assets.connection.query(`SELECT Name,price,quantity FROM ${assets.schemaName}.medicine`,(err, rows) => {
+        if (err) throw err;
+         console.log(rows);
+         res.render("Profile",{
+            medications : rows
+         });
+    })
+ });
+
+ // insert data to the appointment table
+
+app.post("/appointment",encoder, function(req,res){
+    var patient_first_name = req.body.patient_first_name;
+    var patient_last_name = req.body.patient_last_name
+    var contact_num = req.body.contact_num;
+    var appointment_date = req.body.appointment_date;
+    var service_name = req.body.service_name;
+    var doctor = req.body.doctor;
+    let appoint_ID= Math.floor(Math.random() * 100) + 1;
+
+
+    
+    var sql = `insert into ${assets.schemaName}.appointment (appoint_num, patient_first_name, patient_last_name, contact_num, appointment_date, service_name,doc_last_name) Values ?`;
+    var values = [[appoint_ID,patient_first_name,patient_last_name,contact_num,appointment_date,service_name,doctor]];
+    assets.connection.query(sql, [values], function (err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+        res.redirect("/index");
+   });
+
+});
+// INSERT INTO Billing Table.
+app.post("/Processpayment",encoder, function(req,res){
+    var patient_name =req.body.patient_name;
+    var address =req.body.address;
+    var city =req.body.city;
+    var state =req.body.state;
+    var zip =req.body.zip;
+    var patient_email =req.body.email;
+    var cardname = req.body.cardname;
+    var cardnumber =req.body.cardnumber;
+    var expmonth =req.body.expmonth;
+    var expyear =req.body.expyear;
+    var cvv =req.body.cvv;
+    var amount =req.body.amount;
+    var patient_email =req.body.patient_email;
+    var date = req.body.date
+    let confirmCode = (Math.random() + 1).toString(36).substring(7).toUpperCase();
+
+
+
+    
+    var sql = `INSERT INTO ${assets.schemaName}.processed_payment (confirm_code, amount, billing_name, patient_name, card_name, cardnumber, exp_year, exp_month, cvv, address, city, state, zip, date, billing_email, patient_email) VALUES ?`;
+        var values = [[confirmCode,amount,patient_name,patient_name,cardname,cardnumber,expyear,expmonth,cvv,address,city,state,zip, date, patient_email,patient_email]];
+    assets.connection.query(sql, [values], function (err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+        res.redirect("/confirmation");
+   });
+
+});
+
+
+
+
+
+ // edit appointment table
+
+ app.post("/appointment_edit",encoder, function(req,res){
+    const appoint_id= req.body.appoint_num;
+    var sql = `update ${assets.schemaName}.appointment SET appoint_num="`+req.body.appoint_num+'", patient_first_name="'+req.body.patient_first_name+'", patient_last_name="'+req.body.patient_last_name+'", contact_num="'
+    +req.body.contact_num+'", appointment_date="'+req.body.appointment_date+'", service_name="'+req.body.service_name+'", doc_last_name="'+req.body.doc_last_name+'" where appoint_num='+appoint_id;
+    assets.connection.query(sql, function (err, result) {
+        if (err) throw err;
+        res.redirect("/Appoint_manage");
+   });
+});
+
+app.get("/edit1/:appoint_id",(req, res) => {
+    const appoint_id = req.params.appoint_id;
+    assets.connection.query(`SELECT * FROM ${assets.schemaName}.appointment where appoint_num = ${appoint_id}`,(err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.render("CRUD_Edit_admin_appoint",{
+            appointment : result[0]
+        });
+    });
+});
+
+
+
+// DELETE ROWS FORM TABLE
+
+app.get('/delete1/:appoint_id',(req, res) =>{
+    const appoint_id = req.params.appoint_id;
+    let sql = `DELETE FROM ${assets.schemaName}.appointment WHERE appoint_num = ${appoint_id}`;
+    let query = assets.connection.query(sql, (err, result) =>{
+        if(err) throw err;
+        res.redirect('/Appoint_manage');
+    });
+});
+
 // when login is success
 app.get("/admin_login",(req,res) => {
     res.render('admin_login');
 });
-
 app.get("/PatientLogin",(req,res) => {
     res.render('PatientLogin');
 });
-
 app.get("/Chat_bots",(req,res) => {
     res.render('Chat_bots');
+});
+app.get("/",(req,res) => {
+    res.render('index');
 });
 app.get("/index",(req,res) => {
     res.render('index');

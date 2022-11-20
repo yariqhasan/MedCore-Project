@@ -1,4 +1,4 @@
-const API_URL = 'http://4176-68-34-104-179.ngrok.io/'
+const API_URL = 'http://9499-68-34-104-179.ngrok.io/'
 
 function registerUser(bodyData) {
     return httpPostRequest('/register',bodyData)

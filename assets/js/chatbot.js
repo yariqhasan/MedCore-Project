@@ -7,8 +7,6 @@ let input = document.getElementById("chat-input")
 let fab = document.getElementById("fab")
 let fab_close = document.getElementById("fab-close")
 
-const url = "127.0.0.1:8000/index"
-
 input.addEventListener("keyup", function (event) {
   event.preventDefault()
   if (event.keyCode === 13) {
@@ -74,7 +72,7 @@ function respond(msg) {
   if (msg.includes("billing")) {
     document.getElementById("typing").style.display = "none"
     createResponder(
-      ' View the billing page after logging in here: Login'
+      ' View the billing page after logging in!'
     )
   } else if (msg.includes("appointment")){
     document.getElementById("typing").style.display = "none"
