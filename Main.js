@@ -18,8 +18,8 @@ app.set('view engine', 'ejs');
 
 const connection = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "Fcbayern1",
+    user: "sqluser",
+    password: "password",
     database: "clinic_database"
 });
 
