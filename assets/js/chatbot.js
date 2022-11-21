@@ -74,12 +74,18 @@ function respond(msg) {
   if (msg.includes("billing")) {
     document.getElementById("typing").style.display = "none"
     createResponder(
-      ' View the billing page after logging in here: Login'
+      ' View the billing page after logging in here: <a href="/PatientLogin"> Login Page </a>'
     )
   } else if (msg.includes("appointment")){
     document.getElementById("typing").style.display = "none"
     createResponder(
       ' You can make the appointment on our home page at the appointment section'
+    )
+  }
+    else if (msg.includes("bill")){
+    document.getElementById("typing").style.display = "none"
+    createResponder(
+      ' View the billing page after logging in here: <a href="/PatientLogin"> Login Page </a>'
     )
   }
   else if (msg.includes("how to check my appointment")){
