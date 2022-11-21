@@ -88,7 +88,7 @@ function respond(msg) {
       ' View the billing page after logging in here: <a href="/PatientLogin"> Login Page </a>'
     )
   }
-  else if (msg.includes("how to check my appointment")){
+  else if (msg.includes("appointment")){
     document.getElementById("typing").style.display = "none"
     createResponder(
       ' You can check you appointment on your profile account once you login and locate to the appointment section.'
