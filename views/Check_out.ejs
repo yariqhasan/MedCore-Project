@@ -43,7 +43,7 @@
 
 
         <!--cart items details-->
-        <div class="small-container cart-page">
+               <div class="small-container cart-page">
             <table>
                 <tr>
                     <th>Product</th>
@@ -57,15 +57,14 @@
                             <!--image of item added to cart--->
                             <div>
                                 <p>Azilsartan</p>
-                                <small>Price: $10.00</small>
+                                <small>Price: $<spam class="med_price">10.00</spam></small>
                                 <br>
-                                <a href="">Remove</a>
                             </div>
                         </div>
-
                     </td>
-                    <td><input type="number" value="1"></td>
-                    <td>$10.00</td>
+                    <td> <input type="number" class="num" oninput="calc(0)" min="1" max="1000" value="1" /></td>
+                    <td>$<span class="total" id="price1">10.00</span></td>
+                    <td><button onclick="SomeDeleteRowFunction(this)">Remove</button></td>
                 </tr>
                 <tr>
                     <td>
@@ -74,15 +73,15 @@
                             <!--image of item added to cart--->
                             <div>
                                 <p>Losartan</p>
-                                <small>Price: $8.00</small>
+                                <small>Price: $<spam class="med_price">8.00</spam></small>
                                 <br>
-                                <a href="">Remove</a>
                             </div>
                         </div>
 
                     </td>
-                    <td><input type="number" value="1" ></td>
-                    <td>$8.00</td>
+                    <td> <input type="number" class="num" oninput="calc(1)" min="1" max="1000" value="1" /></td>
+                    <td>$<span class="total" id="price2">8.00</span></td>
+                    <td><button onclick="SomeDeleteRowFunction(this)">Remove</button></td>
                 </tr>
                 <tr>
                     <td>
@@ -91,24 +90,23 @@
                             <!--image of item added to cart--->
                             <div>
                                 <p>Valsartan</p>
-                                <small>Price: $13.00</small>
+                                <small>Price: $<spam class="med_price">13.00</spam></small>
                                 <br>
-                                <a href="">Remove</a>
                             </div>
                         </div>
 
                     </td>
-                    <td><input type="number" value="1"></td>
-                    <td>$13.00</td>
+                    <td> <input type="number" class="num" oninput="calc(2)" min="1" max="1000" value="1" /></td>
+                    <td>$<span class="total" id="price3">13.00</span></td>
+                    <td><button onclick="SomeDeleteRowFunction(this)">Remove</button></td>
                 </tr>
             </table>
-
-            <div class="total-price">
+            <div>
 
                 <table>
                     <tr>
                         <td>Subtotal</td>
-                        <td>$150.00</td>
+                        <td>$<span class="subtotal">0</span></td>
                     </tr>
                     <tr>
                         <td>Tax</td>
@@ -122,9 +120,25 @@
 
             </div>
             <div class="button">
-                <a href="Payment" class="submit">Continue</button>
+                <button a href="Payment" class="submit">Continue</button>
 
             </div>
         </div>
+        </body>
+        <script>
+    function calc(n) {
+        var price = document.getElementsByClassName("med_price")[n].innerHTML;
+        var quantity = document.getElementsByClassName("num")[n].value;
+        var total = parseFloat(price) * quantity;
+        if (!isNaN(total)) {
+            document.getElementsByClassName("total")[n].innerHTML = total;
 
+        }
+    }
+    function SomeDeleteRowFunction(o) {
+        //no clue what to put here?
+        var p = o.parentNode.parentNode;
+        p.parentNode.removeChild(p);
+    }
+    </script>
 </html>
