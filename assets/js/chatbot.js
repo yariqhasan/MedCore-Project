@@ -7,6 +7,8 @@ let input = document.getElementById("chat-input")
 let fab = document.getElementById("fab")
 let fab_close = document.getElementById("fab-close")
 
+const url = "127.0.0.1:8000/index"
+
 input.addEventListener("keyup", function (event) {
   event.preventDefault()
   if (event.keyCode === 13) {
@@ -72,7 +74,7 @@ function respond(msg) {
   if (msg.includes("billing")) {
     document.getElementById("typing").style.display = "none"
     createResponder(
-      ' View the billing page after logging in!'
+      ' View the billing page after logging in here: <a href="/PatientLogin"> Login Page </a>'
     )
   } else if (msg.includes("appointment")){
     document.getElementById("typing").style.display = "none"
@@ -80,7 +82,13 @@ function respond(msg) {
       ' You can make the appointment on our home page at the appointment section'
     )
   }
-  else if (msg.includes("how to check my appointment")){
+    else if (msg.includes("bill")){
+    document.getElementById("typing").style.display = "none"
+    createResponder(
+      ' View the billing page after logging in here: <a href="/PatientLogin"> Login Page </a>'
+    )
+  }
+  else if (msg.includes("appointment")){
     document.getElementById("typing").style.display = "none"
     createResponder(
       ' You can check you appointment on your profile account once you login and locate to the appointment section.'
@@ -111,33 +119,7 @@ function respond(msg) {
       'Sorry, I\'m unable to process this request. If you\'d like to speak with an admin, go to this page: N/A '
     )
   }
-  //   fetch(`${url}/${id}/respond`, {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //   })
-
-  // .then(function (response) {
-  //   document.getElementById("typing").style.display = "none"
-  //   return response.json()
-  // })
-  // .then(function (responses) {
-  //   console.log(responses)
-  //   if (responses) {
-  //     for (let response of responses) {
-  //       createResponder(response.text)
-  //     }
-  //   } else {
-  //     createResponder(
-  //       "Sorry, I'm having trouble understanding you, try asking me in an other way"
-  //     )
-  //   }
-  // })
-  // .catch(function (err) {
-  //   document.getElementById("typing").style.display = "none"
-  //   createResponder(
-  //     "I'm having some technical issues. Try again later :)"
-  //   )
-  // })
+  
 }
 
 function voice() {
